@@ -2,14 +2,13 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
+  --font-display: var(--font-mangiola);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,85 +45,126 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Le Cercle brand colors available as Tailwind utilities */
+  --color-rosa: var(--color-rosa);
+  --color-laranja: var(--color-laranja);
+  --color-azul-escuro: var(--color-azul-escuro);
+  --color-cinza-claro: var(--color-cinza-claro);
+  --color-rosa-hover: var(--color-rosa-hover);
+  --color-laranja-hover: var(--color-laranja-hover);
+  --color-rosa-light: var(--color-rosa-light);
+  --color-laranja-light: var(--color-laranja-light);
+  --color-surface: var(--color-surface);
+  --color-surface-low: var(--color-surface-low);
+  --color-surface-lowest: var(--color-surface-lowest);
 }
+
+/* ============================================================
+   Le Cercle — Modern Salon Design System
+   Light-mode only. No borders by default. Soft, warm palette.
+   ============================================================ */
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  /* shadcn/ui semantic tokens — Le Cercle brand palette */
+  --background: #f9f9f9;
+  --foreground: #303342;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --card: #ffffff;
+  --card-foreground: #303342;
+
+  --popover: #ffffff;
+  --popover-foreground: #303342;
+
+  --primary: #934655;
+  --primary-foreground: #ffffff;
+
+  --secondary: #9c441c;
+  --secondary-foreground: #ffffff;
+
+  --muted: #f3f3f3;
+  --muted-foreground: #6b7280;
+
+  --accent: #FFE8ED;
+  --accent-foreground: #303342;
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: transparent;
+  --input: #f3f3f3;
+  --ring: #FF9FAF;
+
+  --radius: 0.75rem;
+
+  /* Chart palette — brand-derived */
+  --chart-1: #FF9FAF;
+  --chart-2: #FC8E60;
+  --chart-3: #934655;
+  --chart-4: #9c441c;
+  --chart-5: #303342;
+
+  /* Sidebar — dark azul escuro theme */
+  --sidebar: #303342;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #FF9FAF;
+  --sidebar-primary-foreground: #303342;
+  --sidebar-accent: #3d3f50;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: transparent;
+  --sidebar-ring: #FF9FAF;
+
+  /* Le Cercle brand custom properties */
+  --color-rosa: #FF9FAF;
+  --color-laranja: #FC8E60;
+  --color-azul-escuro: #303342;
+  --color-cinza-claro: #F2F2F2;
+  --color-rosa-hover: #FF8A9D;
+  --color-laranja-hover: #E87A4D;
+  --color-rosa-light: #FFE8ED;
+  --color-laranja-light: #FFF0E8;
+  --color-surface: #f9f9f9;
+  --color-surface-low: #f3f3f3;
+  --color-surface-lowest: #ffffff;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    border-color: transparent;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
     @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  /* Selection highlight using rosa brand color */
+  ::selection {
+    background-color: #FF9FAF;
+    color: #303342;
+  }
+
+  ::-moz-selection {
+    background-color: #FF9FAF;
+    color: #303342;
+  }
+
+  /* Remove default borders from common elements */
+  input,
+  textarea,
+  select,
+  button,
+  fieldset,
+  hr,
+  table,
+  th,
+  td {
+    border-color: transparent;
   }
 }

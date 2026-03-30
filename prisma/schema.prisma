@@ -1,0 +1,205 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Criado no formulário de cadastro, ANTES de pagar
+model PendingUser {
+  id              String        @id @default(uuid())
+  name            String
+  email           String        @unique
+  phone           String?
+  passwordHash    String
+  plan            String
+  couponCode      String?
+  originalPrice   Float
+  finalPrice      Float
+  acceptedTerms   Boolean       @default(false)
+  acceptedTermsAt DateTime?
+  mpPreferenceId  String?       @unique
+  mpPaymentId     String?       @unique
+  status          PendingStatus @default(AWAITING_PAYMENT)
+  createdAt       DateTime      @default(now())
+}
+
+enum PendingStatus {
+  AWAITING_PAYMENT
+  PAID
+  EXPIRED
+}
+
+// Criado pelo webhook após pagamento aprovado
+model User {
+  id                  String    @id @default(uuid())
+  email               String    @unique
+  passwordHash        String
+  name                String
+  phone               String?
+  avatarUrl           String?   @db.Text
+  level               Level     @default(INICIANTE)
+  role                Role      @default(MEMBER)
+  subscriptionStatus  SubStatus @default(ACTIVE)
+  subscriptionPlan    String
+  subscriptionEnd     DateTime?
+  mpPaymentId         String?   @unique
+  couponUsed          String?
+  amountPaid          Float?
+  acceptedTerms       Boolean   @default(true)
+  acceptedTermsAt     DateTime?
+  onboardingDone      Boolean   @default(false)
+  onboardingAnswer    String?   @db.Text
+  blockReason         String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  posts               Post[]
+  comments            Comment[]
+  reactions           Reaction[]
+}
+
+enum Level {
+  INICIANTE
+  INTERMEDIARIO
+  AVANCADO
+}
+
+enum Role {
+  MEMBER
+  ADMIN
+}
+
+enum SubStatus {
+  ACTIVE
+  INACTIVE
+  PAST_DUE
+  CANCELED
+}
+
+model WeekContent {
+  id            String    @id @default(uuid())
+  weekNumber    Int       @unique
+  title         String
+  description   String    @db.Text
+  level         Level
+  musicUrl      String    @db.Text
+  videoUrl      String    @db.Text
+  vocabulary    Json
+  prompts       Json
+  exercise      String?   @db.Text
+  challengeText String    @db.Text
+  isActive      Boolean   @default(false)
+  publishedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  meetings      Meeting[]
+}
+
+model Meeting {
+  id               String       @id @default(uuid())
+  title            String
+  level            Level
+  scheduledAt      DateTime
+  duration         Int          @default(60)
+  meetingUrl       String       @db.Text
+  maxParticipants  Int          @default(8)
+  description      String?      @db.Text
+  weekContentId    String?
+  weekContent      WeekContent? @relation(fields: [weekContentId], references: [id])
+  isPremiumOnly    Boolean      @default(false)
+  city             String?
+  address          String?      @db.Text
+  createdAt        DateTime     @default(now())
+}
+
+model Post {
+  id          String    @id @default(uuid())
+  content     String    @db.Text
+  type        PostType  @default(PRATICA)
+  audioUrl    String?   @db.Text
+  imageUrl    String?   @db.Text
+  isPinned    Boolean   @default(false)
+  isFeatured  Boolean   @default(false)
+  isChallenge Boolean   @default(false)
+  level       Level?
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  reactions   Reaction[]
+  createdAt   DateTime  @default(now())
+}
+
+enum PostType {
+  PRATICA
+  DUVIDA
+  DISCUSSAO
+  DESAFIO
+}
+
+model Comment {
+  id        String    @id @default(uuid())
+  content   String    @db.Text
+  audioUrl  String?   @db.Text
+  postId    String
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User      @relation(fields: [authorId], references: [id])
+  parentId  String?
+  parent    Comment?  @relation("Replies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("Replies")
+  createdAt DateTime  @default(now())
+}
+
+model Reaction {
+  id     String @id @default(uuid())
+  type   String @default("like")
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+}
+
+model Coupon {
+  id              String       @id @default(uuid())
+  code            String       @unique
+  discountType    DiscountType
+  discountValue   Float
+  maxUses         Int?
+  currentUses     Int          @default(0)
+  minPlanInterval String?
+  validFrom       DateTime     @default(now())
+  validUntil      DateTime?
+  isActive        Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model PremiumEvent {
+  id          String   @id @default(uuid())
+  title       String
+  description String   @db.Text
+  city        String
+  date        DateTime
+  maxSpots    Int
+  spotsLeft   Int
+  imageUrl    String?  @db.Text
+  createdAt   DateTime @default(now())
+}
