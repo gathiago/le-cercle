@@ -170,8 +170,8 @@ async function main() {
       title: "La Mode et le Style",
       description: "Mergulhe no mundo da moda francesa. De Coco Chanel a street style parisiense, aprenda a descrever roupas e expressar seu estilo pessoal.",
       level: 'INTERMEDIARIO',
-      musicUrl: 'https://open.spotify.com/track/5uCax9HNcjBTbkSDWxARqe',
-      videoUrl: 'https://www.youtube.com/embed/0gXvVUg2-bY',
+      musicUrl: 'https://open.spotify.com/track/2LTlO3NuNVN70lp2ZbLswZ',
+      videoUrl: 'https://www.youtube.com/embed/B2QOukdavwM',
       vocabulary: [
         { word: 'La Robe', translation: 'O Vestido' },
         { word: 'Les Chaussures', translation: 'Os Sapatos' },
