@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { Resend } from 'resend'
 import crypto from 'crypto'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
 
 export async function POST(request: Request) {
@@ -31,6 +29,8 @@ export async function POST(request: Request) {
       const resetUrl = `${APP_URL}/forgot-password?token=${token}`
 
       try {
+        const { Resend } = await import('resend')
+        const resend = new Resend(process.env.RESEND_API_KEY)
         await resend.emails.send({
           from: process.env.EMAIL_FROM || 'Le Cercle <noreply@idiomascommardia.com>',
           to: email,

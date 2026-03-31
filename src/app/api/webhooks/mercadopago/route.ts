@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { paymentClient } from '@/lib/mercadopago'
-import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
 
 const planNames: Record<string, string> = {
@@ -103,6 +101,8 @@ export async function POST(request: Request) {
 
         // Send confirmation email
         try {
+          const { Resend } = await import('resend')
+          const resend = new Resend(process.env.RESEND_API_KEY)
           await resend.emails.send({
             from: process.env.EMAIL_FROM || 'Le Cercle <noreply@idiomascommardia.com>',
             to: pendingUser.email,
