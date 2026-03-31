@@ -4,15 +4,16 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { PlayCircle, CheckCircle, YoutubeLogo } from '@phosphor-icons/react'
 
+const CANVA_EMBED = 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view?embed'
+
 const lessons = [
-  { title: 'Introdução ao Presente do Indicativo', videoId: 'OaFz_JXDTOQ' },
-  { title: 'Verbos do 1º grupo (-ER)', videoId: 'v4gfPOH8bJk' },
-  { title: 'Verbos do 2º grupo (-IR)', videoId: 'Yt7WGJH-cWM' },
-  { title: 'Verbos do 3º grupo (irregulares)', videoId: '8sWoHxT0Mhw' },
-  { title: 'Être e Avoir no presente', videoId: 'cZ2x-ogfFKI' },
-  { title: 'Verbos pronominais', videoId: 'KwPqxuM9N4I' },
-  { title: 'Negação no presente', videoId: 'UKxYIEd5V5Q' },
-  { title: 'Exercícios práticos', videoId: 'JF3Fv2Io0RU' },
+  { title: 'Apresentação do Curso', type: 'canva' as const, videoId: '' },
+  { title: 'Aula 0 — Introdução', type: 'youtube' as const, videoId: 'b6T6-fvox8I' },
+  { title: 'Aula 1 — Présent de l\'indicatif', type: 'youtube' as const, videoId: 'loi51vXe3H0' },
+  { title: 'Aula 2 — Verbos do 1º grupo', type: 'youtube' as const, videoId: 'SN50sYAjrd4' },
+  { title: 'Aula 3 — Verbos do 2º grupo', type: 'youtube' as const, videoId: '5km6rmM-3h0' },
+  { title: 'Aula 4 — Verbos do 3º grupo', type: 'youtube' as const, videoId: '7Xb-B3K7cMU' },
+  { title: 'Aula 5 — Revisão e prática', type: 'youtube' as const, videoId: 'R44zqzlkK2s' },
 ]
 
 const spring = { type: 'spring' as const, stiffness: 100, damping: 20 }
@@ -51,7 +52,7 @@ export default function CursoGratuitoPage() {
             </span>
           </div>
           <h1 className="text-2xl md:text-[2rem] font-bold text-[var(--color-azul-escuro)] tracking-tight leading-tight">
-            Curso Gratuito: Presente do Indicativo
+            Curso Gratuito: Présent de l&apos;Indicatif
           </h1>
           <p className="text-[var(--color-azul-escuro)]/45 mt-2 max-w-[60ch]">
             Tudo que voc&ecirc; precisa saber sobre o principal tempo verbal do franc&ecirc;s.
@@ -67,15 +68,25 @@ export default function CursoGratuitoPage() {
             transition={{ ...spring, delay: 0.05 }}
           >
             <div className="bg-[var(--color-surface-lowest)] rounded-[1.5rem] overflow-hidden shadow-[0_8px_32px_rgba(48,51,66,0.04)]">
-              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                <iframe
-                  key={activeLesson.videoId}
-                  className="absolute inset-0 w-full h-full"
-                  src={`https://www.youtube.com/embed/${activeLesson.videoId}?rel=0`}
-                  title={activeLesson.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div className="relative w-full" style={{ paddingBottom: activeLesson.type === 'canva' ? '62.5%' : '56.25%' }}>
+                {activeLesson.type === 'canva' ? (
+                  <iframe
+                    key="canva"
+                    className="absolute inset-0 w-full h-full"
+                    src={CANVA_EMBED}
+                    title={activeLesson.title}
+                    allowFullScreen
+                  />
+                ) : (
+                  <iframe
+                    key={activeLesson.videoId}
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${activeLesson.videoId}?rel=0`}
+                    title={activeLesson.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                )}
               </div>
               <div className="p-5 md:p-6">
                 <p className="text-[10px] text-[var(--color-rosa)] font-semibold tracking-[2.5px] uppercase mb-1.5">

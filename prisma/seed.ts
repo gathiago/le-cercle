@@ -382,6 +382,21 @@ async function main() {
     },
   })
 
+  // ===== PRODUTO DIGITAL: Guia DELF B2 =====
+  await prisma.digitalProduct.upsert({
+    where: { slug: 'guia-delf-b2' },
+    update: {},
+    create: {
+      slug: 'guia-delf-b2',
+      title: 'Guia do DELF B2',
+      description: 'E-book que destrincha e organiza a prova do DELF B2, a certificação que a maioria das universidades francófonas pede. Explicação sobre cada parte da prova e roteiros de como fazer cada uma delas.',
+      price: 39.90,
+      fileUrl: '/uploads/produtos/guia-delf-b2.pdf',
+      fileName: 'Guia-DELF-B2-Le-Cercle.pdf',
+      isActive: true,
+    },
+  })
+
   // ===== CLUBE: Francês Básico =====
   const clubBasico = await prisma.club.upsert({
     where: { slug: 'frances-basico' },

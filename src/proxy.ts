@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth'
 import { NextResponse } from 'next/server'
 
-const publicRoutes = ['/checkout', '/login', '/forgot-password', '/termos', '/privacidade', '/resumos-verbais', '/produto', '/newsletter']
+const publicRoutes = ['/checkout', '/login', '/forgot-password', '/termos', '/privacidade', '/resumos-verbais', '/guia-delf-b2', '/produto', '/newsletter']
 const apiPublicRoutes = ['/api/auth', '/api/webhooks', '/api/coupons/validate', '/api/checkout', '/api/products', '/api/newsletter']
 
 export default auth((req) => {

@@ -23,7 +23,7 @@ const products = [
       'E-book que destrin\u00e7a e organiza a prova do DELF B2, a certifica\u00e7\u00e3o que a maioria das universidades franc\u00f3fonas pede. Explica\u00e7\u00e3o sobre cada parte da prova e roteiros de como fazer cada uma delas.',
     badge: 'E-book',
     badgeColor: 'text-[var(--color-laranja)] bg-[var(--color-laranja)]/10',
-    href: '/resumos-verbais',
+    href: '/guia-delf-b2',
     icon: Certificate,
     gradient: 'from-[var(--color-secondary)] to-[var(--color-laranja)]',
   },
