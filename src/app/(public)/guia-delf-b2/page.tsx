@@ -37,7 +37,7 @@ export default function GuiaDelfB2Page() {
       {/* Hero */}
       <section className="pt-8 pb-20 px-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-[var(--color-laranja-light)]/40 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '300px', backgroundRepeat: 'repeat' }} />
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '500px', backgroundRepeat: 'repeat' }} />
 
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-16 items-center relative">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.1 }}>
@@ -179,6 +179,7 @@ export default function GuiaDelfB2Page() {
 
       {/* CTA */}
       <section className="py-20 px-6 bg-gradient-to-br from-[var(--color-secondary)] to-[var(--color-laranja)] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Formas.png)', backgroundSize: '500px', backgroundRepeat: 'repeat' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.06] rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative">
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight mb-5">Garanta o seu guia!</h2>

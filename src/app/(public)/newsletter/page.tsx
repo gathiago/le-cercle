@@ -45,7 +45,7 @@ export default function NewsletterPage() {
         className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
           backgroundImage: 'url(/Estampa-Logo.png)',
-          backgroundSize: '180px',
+          backgroundSize: '500px',
           backgroundRepeat: 'repeat',
         }}
       />
@@ -103,7 +103,7 @@ export default function NewsletterPage() {
                   </div>
                 </div>
                 <h2 className="text-xl font-bold text-[var(--color-azul-escuro)] mb-2">
-                  Merci! Voce esta na lista.
+                  Merci! Você está na lista.
                 </h2>
                 <p className="text-sm text-[var(--color-azul-escuro)]/40">
                   Fique de olho no seu e-mail.
@@ -189,7 +189,7 @@ export default function NewsletterPage() {
             transition={{ delay: 0.6 }}
             className="text-center text-xs text-[var(--color-azul-escuro)]/25 mt-6"
           >
-            Prometemos nao enviar spam. Voce pode cancelar a qualquer momento.
+            Prometemos não enviar spam. Você pode cancelar a qualquer momento.
           </motion.p>
         </div>
       </div>

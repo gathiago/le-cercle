@@ -279,6 +279,7 @@ export default function ResumosVerbaisPage() {
 
       {/* ===== CTA FINAL ===== */}
       <section className="py-20 px-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '500px', backgroundRepeat: 'repeat' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.06] rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative">
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight mb-5">

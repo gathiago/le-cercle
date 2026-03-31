@@ -11,7 +11,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             <span className="text-[9px] text-[var(--color-rosa)] font-semibold tracking-[2.5px] uppercase">Mardia</span>
           </Link>
           <Link href="/login" className="text-sm font-medium text-[var(--color-azul-escuro)]/40 hover:text-[var(--color-azul-escuro)] transition-colors">
-            Ja tem conta? Entrar
+            Já tem conta? Entrar
           </Link>
         </div>
       </header>

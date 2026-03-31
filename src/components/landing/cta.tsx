@@ -10,7 +10,7 @@ export function LandingCta() {
   return (
     <section className="py-28 px-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)] relative overflow-hidden">
       {/* Estampa de fundo */}
-      <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '200px', backgroundRepeat: 'repeat' }} />
+      <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '500px', backgroundRepeat: 'repeat' }} />
       {/* Ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.06] rounded-full blur-[100px] pointer-events-none" />
 

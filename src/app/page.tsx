@@ -32,7 +32,7 @@ export default function LandingPage() {
 
       {/* ===== PROBLEMA — Tonal shift to azul-escuro ===== */}
       <section className="py-28 px-6 bg-[var(--color-azul-escuro)] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Formas.png)', backgroundSize: '400px', backgroundRepeat: 'repeat' }} />
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Formas.png)', backgroundSize: '600px', backgroundRepeat: 'repeat' }} />
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-20 items-center relative">
           <div>
             <p className="text-[var(--color-rosa)] text-xs font-semibold tracking-[3px] uppercase mb-6">O problema</p>
@@ -69,7 +69,7 @@ export default function LandingPage() {
 
       {/* ===== SOBRE A MARDIA — surface shift to rosa-light ===== */}
       <section className="py-28 px-6 bg-[var(--color-rosa-light)]/40 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '220px', backgroundRepeat: 'repeat' }} />
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '500px', backgroundRepeat: 'repeat' }} />
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[320px_1fr] gap-20 items-center">
           <div className="flex justify-center md:justify-start">
             <div className="relative">

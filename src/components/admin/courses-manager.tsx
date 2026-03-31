@@ -129,7 +129,7 @@ export function AdminCoursesManager({
                 <Input
                   value={form.title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  placeholder="Ex: Frances para Viajantes"
+                  placeholder="Ex: Francês para Viajantes"
                   className="bg-[var(--color-surface-low)] border-none rounded-xl"
                 />
               </div>
@@ -151,7 +151,7 @@ export function AdminCoursesManager({
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>Nivel</Label>
+                  <Label>Nível</Label>
                   <Select value={form.level} onValueChange={(v) => setForm((f) => ({ ...f, level: v ?? 'INICIANTE' }))}>
                     <SelectTrigger className="bg-[var(--color-surface-low)] border-none rounded-xl">
                       <SelectValue />

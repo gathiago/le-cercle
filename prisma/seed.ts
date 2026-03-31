@@ -203,7 +203,7 @@ async function main() {
       description: "Explore o universo cultural francês: cinema, literatura, música e artes plásticas. Aprenda a expressar opiniões e debater sobre cultura.",
       level: 'INTERMEDIARIO',
       musicUrl: 'https://open.spotify.com/track/3CeCwYWvdfXbZLKhxaYOBN',
-      videoUrl: 'https://www.youtube.com/embed/EEIk7fjBpSc',
+      videoUrl: 'https://www.youtube.com/embed/rOjHhS5MtvA',
       vocabulary: [
         { word: 'Le Cinéma', translation: 'O Cinema' },
         { word: 'Le Tableau', translation: 'O Quadro / Pintura' },
@@ -423,13 +423,14 @@ async function main() {
   })
 
   // ===== CURSO: Primeiros Passos no Francês =====
+  // ===== CURSO 1: Présent de l'Indicatif (YouTube) =====
   const curso1 = await prisma.course.upsert({
-    where: { slug: 'primeiros-passos' },
+    where: { slug: 'present-de-lindicatif' },
     update: {},
     create: {
-      slug: 'primeiros-passos',
-      title: 'Primeiros Passos no Francês',
-      description: 'Seu ponto de partida para falar francês. Aprenda a se apresentar, cumprimentar e ter conversas básicas.',
+      slug: 'present-de-lindicatif',
+      title: 'Curso Présent de l\'Indicatif',
+      description: 'Tudo que você precisa saber sobre o principal e mais utilizado tempo verbal da língua francesa. O primeiro que a gente aprende: o presente!',
       level: 'INICIANTE',
       clubId: clubBasico.id,
       isFree: true,
@@ -438,15 +439,13 @@ async function main() {
     },
   })
 
-  // Aulas do curso — Présent de l'Indicatif
   const aulasPresent = [
-    { slug: 'apresentacao', title: 'Apresentação do Curso', videoUrl: 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view', duration: 5, sortOrder: 1 },
-    { slug: 'aula-0-introducao', title: 'Aula 0 — Introdução', videoUrl: 'https://youtu.be/b6T6-fvox8I', duration: 10, sortOrder: 2 },
-    { slug: 'aula-1-present', title: 'Aula 1 — Présent de l\'indicatif', videoUrl: 'https://youtu.be/loi51vXe3H0', duration: 15, sortOrder: 3 },
-    { slug: 'aula-2-grupo-1', title: 'Aula 2 — Verbos do 1º grupo', videoUrl: 'https://youtu.be/SN50sYAjrd4', duration: 12, sortOrder: 4 },
-    { slug: 'aula-3-grupo-2', title: 'Aula 3 — Verbos do 2º grupo', videoUrl: 'https://youtu.be/5km6rmM-3h0', duration: 14, sortOrder: 5 },
-    { slug: 'aula-4-grupo-3', title: 'Aula 4 — Verbos do 3º grupo', videoUrl: 'https://youtu.be/7Xb-B3K7cMU', duration: 16, sortOrder: 6 },
-    { slug: 'aula-5-revisao', title: 'Aula 5 — Revisão e prática', videoUrl: 'https://youtu.be/R44zqzlkK2s', duration: 13, sortOrder: 7 },
+    { slug: 'aula-0-introducao', title: 'Aula 0 — Introdução', videoUrl: 'https://youtu.be/b6T6-fvox8I', duration: 10, sortOrder: 1 },
+    { slug: 'aula-1-present', title: 'Aula 1 — Présent de l\'indicatif', videoUrl: 'https://youtu.be/loi51vXe3H0', duration: 15, sortOrder: 2 },
+    { slug: 'aula-2-grupo-1', title: 'Aula 2 — Verbos do 1º grupo', videoUrl: 'https://youtu.be/SN50sYAjrd4', duration: 12, sortOrder: 3 },
+    { slug: 'aula-3-grupo-2', title: 'Aula 3 — Verbos do 2º grupo', videoUrl: 'https://youtu.be/5km6rmM-3h0', duration: 14, sortOrder: 4 },
+    { slug: 'aula-4-grupo-3', title: 'Aula 4 — Verbos do 3º grupo', videoUrl: 'https://youtu.be/7Xb-B3K7cMU', duration: 16, sortOrder: 5 },
+    { slug: 'aula-5-revisao', title: 'Aula 5 — Revisão e prática', videoUrl: 'https://youtu.be/R44zqzlkK2s', duration: 13, sortOrder: 6 },
   ]
 
   for (const aula of aulasPresent) {
@@ -464,6 +463,36 @@ async function main() {
       },
     })
   }
+
+  // ===== CURSO 2: Material Présent de l'Indicatif (Canva) =====
+  const curso2 = await prisma.course.upsert({
+    where: { slug: 'material-present-indicatif' },
+    update: {},
+    create: {
+      slug: 'material-present-indicatif',
+      title: 'Material: Présent de l\'Indicatif',
+      description: 'Apresentação completa com explicações visuais sobre o presente do indicativo em francês. Material complementar ao curso em vídeo.',
+      level: 'INICIANTE',
+      clubId: clubBasico.id,
+      isFree: true,
+      isPublished: true,
+      sortOrder: 2,
+    },
+  })
+
+  await prisma.lesson.upsert({
+    where: { courseId_slug: { courseId: curso2.id, slug: 'apresentacao-completa' } },
+    update: {},
+    create: {
+      slug: 'apresentacao-completa',
+      title: 'Présent de l\'Indicatif — Apresentação Completa',
+      videoUrl: 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view',
+      duration: 30,
+      courseId: curso2.id,
+      sortOrder: 1,
+      isPublished: true,
+    },
+  })
 
   console.log('')
   console.log('=== SEED CONCLUÍDO ===')

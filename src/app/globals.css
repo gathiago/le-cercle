@@ -145,7 +145,7 @@
   --secondary-foreground: #1c1c22;
 
   --muted: #25252d;
-  --muted-foreground: #71717a;
+  --muted-foreground: #a1a1aa;
 
   --accent: #2a1f22;
   --accent-foreground: #e4e4e7;
@@ -178,8 +178,8 @@
   --color-rosa-light: #2a1f22;
   --color-laranja-light: #2a2118;
   --color-surface: #141418;
-  --color-surface-low: #1c1c22;
-  --color-surface-lowest: #25252d;
+  --color-surface-low: #1e1e26;
+  --color-surface-lowest: #282832;
 }
 
 @layer base {

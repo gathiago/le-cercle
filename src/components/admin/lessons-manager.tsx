@@ -218,7 +218,7 @@ export function AdminLessonsManager({
                   value={form.content}
                   onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))}
                   rows={6}
-                  placeholder="Conteudo em texto da aula, notas, exercicios..."
+                  placeholder="Conteúdo em texto da aula, notas, exercícios..."
                   className="bg-[var(--color-surface-low)] border-none rounded-xl"
                 />
               </div>

@@ -119,7 +119,7 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
                 <Input
                   value={form.name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  placeholder="Ex: Clube de Cinema Frances"
+                  placeholder="Ex: Clube de Cinema Francês"
                   className="bg-[var(--color-surface-low)] border-none rounded-xl"
                 />
               </div>
@@ -132,7 +132,7 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
                 />
               </div>
               <div>
-                <Label>Descricao</Label>
+                <Label>Descrição</Label>
                 <Textarea
                   value={form.description}
                   onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
@@ -141,7 +141,7 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>Plano Minimo</Label>
+                  <Label>Plano Mínimo</Label>
                   <Select value={form.minPlan} onValueChange={(v) => setForm((f) => ({ ...f, minPlan: v ?? 'monthly' }))}>
                     <SelectTrigger className="bg-[var(--color-surface-low)] border-none rounded-xl">
                       <SelectValue />
