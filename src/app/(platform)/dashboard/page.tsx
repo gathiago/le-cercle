@@ -47,6 +47,14 @@ export default async function DashboardPage() {
   const userClubIds = new Set(userClubMemberships.map(m => m.clubId))
   const hasClubs = userClubIds.size > 0
 
+  // Sort clubs: unlocked (member) first, then locked
+  const sortedClubs = [...allClubs].sort((a, b) => {
+    const aMember = userClubIds.has(a.id) ? 0 : 1
+    const bMember = userClubIds.has(b.id) ? 0 : 1
+    if (aMember !== bMember) return aMember - bMember
+    return a.sortOrder - b.sortOrder
+  })
+
   return (
     <div className="max-w-6xl mx-auto">
       {/* Greeting */}
@@ -69,14 +77,14 @@ export default async function DashboardPage() {
         </div>
 
         <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-hide" style={{ scrollSnapType: 'x mandatory' }}>
-          {allClubs.map((club) => {
+          {sortedClubs.map((club) => {
             const isMember = userClubIds.has(club.id)
             const subtitle = clubSubtitles[club.name] || club.description?.split('—')[0]?.trim() || ''
 
             return (
               <div key={club.id} className="shrink-0 scroll-snap-start" style={{ scrollSnapAlign: 'start' }}>
                 {isMember ? (
-                  <Link href="/conteudo-gratuito" className="block group">
+                  <Link href={`/clube/${club.slug}`} className="block group">
                     <div className="relative w-[220px] h-[300px] rounded-[1.5rem] overflow-hidden shadow-[0_8px_32px_rgba(48,51,66,0.1)]">
                       {club.imageUrl ? (
                         <img src={club.imageUrl.startsWith('/uploads/') ? `/api${club.imageUrl}` : club.imageUrl} alt={club.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

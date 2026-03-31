@@ -5,7 +5,7 @@ import { getPlanById, type PlanId } from '@/lib/plans'
 
 export async function POST(request: Request) {
   try {
-    const { name, email, password, phone, plan, couponCode } = await request.json()
+    const { name, email, password, phone, plan, couponCode, clubs } = await request.json()
 
     if (!name || !email || !password || !plan) {
       return NextResponse.json({ error: 'Campos obrigatórios faltando' }, { status: 400 })
@@ -82,6 +82,22 @@ export async function POST(request: Request) {
         acceptedTermsAt: new Date(),
       },
     })
+
+    // Assign selected clubs
+    if (clubs) {
+      const clubSlugs = typeof clubs === 'string' ? clubs.split(',').filter(Boolean) : []
+      if (clubSlugs.length > 0) {
+        const clubRecords = await prisma.club.findMany({
+          where: { slug: { in: clubSlugs } },
+          select: { id: true },
+        })
+        for (const club of clubRecords) {
+          await prisma.clubMember.create({
+            data: { userId: user.id, clubId: club.id },
+          })
+        }
+      }
+    }
 
     return NextResponse.json({ success: true, userId: user.id }, { status: 201 })
   } catch (error) {

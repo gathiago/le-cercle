@@ -16,6 +16,7 @@ model PendingUser {
   phone           String?
   passwordHash    String
   plan            String
+  selectedClubs   String?       @db.Text  // comma-separated club slugs
   couponCode      String?
   originalPrice   Float
   finalPrice      Float

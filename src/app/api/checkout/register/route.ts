@@ -5,7 +5,7 @@ import { getPlanById, type PlanId } from '@/lib/plans'
 
 export async function POST(request: Request) {
   try {
-    const { name, email, password, phone, plan, couponCode, acceptedTerms } = await request.json()
+    const { name, email, password, phone, plan, couponCode, acceptedTerms, clubs } = await request.json()
 
     if (!name || !email || !password || !plan || !acceptedTerms) {
       return NextResponse.json({ error: 'Campos obrigatórios faltando' }, { status: 400 })
@@ -56,6 +56,7 @@ export async function POST(request: Request) {
         phone: phone || null,
         passwordHash,
         plan,
+        selectedClubs: clubs || null,
         couponCode: couponCode ? couponCode.toUpperCase() : null,
         originalPrice,
         finalPrice,

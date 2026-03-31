@@ -74,7 +74,7 @@ export async function POST(request: Request) {
         }
 
         // Create User from PendingUser
-        await prisma.user.create({
+        const newUser = await prisma.user.create({
           data: {
             email: pendingUser.email,
             passwordHash: pendingUser.passwordHash,
@@ -90,6 +90,22 @@ export async function POST(request: Request) {
             acceptedTermsAt: pendingUser.acceptedTermsAt,
           },
         })
+
+        // Assign selected clubs from checkout
+        if (pendingUser.selectedClubs) {
+          const clubSlugs = pendingUser.selectedClubs.split(',').filter(Boolean)
+          if (clubSlugs.length > 0) {
+            const clubRecords = await prisma.club.findMany({
+              where: { slug: { in: clubSlugs } },
+              select: { id: true },
+            })
+            for (const club of clubRecords) {
+              await prisma.clubMember.create({
+                data: { userId: newUser.id, clubId: club.id },
+              })
+            }
+          }
+        }
 
         // Increment coupon usage if applicable
         if (pendingUser.couponCode) {

@@ -39,6 +39,7 @@ function CadastroContent() {
   const searchParams = useSearchParams()
   const planId = searchParams.get('plan') || 'yearly'
   const couponCode = searchParams.get('coupon') || ''
+  const clubsParam = searchParams.get('clubs') || ''
   const plan = getPlanById(planId as any)
 
   const [loading, setLoading] = useState(false)
@@ -65,7 +66,7 @@ function CadastroContent() {
       const res = await fetch('/api/checkout/simulate-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: formData.name, email: formData.email, password: formData.password, phone: formData.phone || null, plan: planId, couponCode: couponCode || null }),
+        body: JSON.stringify({ name: formData.name, email: formData.email, password: formData.password, phone: formData.phone || null, plan: planId, couponCode: couponCode || null, clubs: clubsParam || null }),
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error || 'Erro ao processar'); setLoading(false); return }
