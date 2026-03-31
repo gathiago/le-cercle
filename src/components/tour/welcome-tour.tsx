@@ -1,4 +1,4 @@
-'use client'
+{'use client'}
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,8 +9,8 @@ const steps = [
   {
     icon: Sparkle,
     title: 'Bienvenue au Cercle!',
-    subtitle: 'Seu sal\u00e3o liter\u00e1rio de franc\u00eas',
-    description: 'Que bom ter voc\u00ea aqui! Vamos fazer um tour r\u00e1pido para voc\u00ea conhecer tudo o que a plataforma oferece.',
+    subtitle: 'Seu salão literário de francês',
+    description: 'Que bom ter você aqui! Vamos fazer um tour rápido para você conhecer tudo o que a plataforma oferece.',
     gradient: 'from-[#303342] to-[#4a4d5e]',
     iconBg: 'bg-white/15',
     pattern: 'Estampa-Logo.png',
@@ -18,8 +18,8 @@ const steps = [
   {
     icon: BookOpen,
     title: 'Seus Clubes',
-    subtitle: 'Conte\u00fado exclusivo por tema',
-    description: 'Cada clube tem aulas, materiais e atividades pr\u00f3prias. Os clubes desbloqueados aparecem no seu Dashboard \u2014 clique em um para acessar os cursos e as aulas!',
+    subtitle: 'Conteúdo exclusivo por tema',
+    description: 'Cada clube tem aulas, materiais e atividades próprias. Os clubes desbloqueados aparecem no seu Dashboard — clique em um para acessar os cursos e as aulas!',
     gradient: 'from-[#934655] to-[#FF9FAF]',
     iconBg: 'bg-[#FF9FAF]/30',
     pattern: 'Estampa-Formas.png',
@@ -27,8 +27,8 @@ const steps = [
   {
     icon: GraduationCap,
     title: 'Semana & Biblioteca',
-    subtitle: 'Conte\u00fado semanal + arquivo completo',
-    description: 'Toda semana tem um tema novo com v\u00eddeo, vocabul\u00e1rio, m\u00fasica e desafio. Na Biblioteca, voc\u00ea encontra todas as semanas anteriores organizadas por n\u00edvel.',
+    subtitle: 'Conteúdo semanal + arquivo completo',
+    description: 'Toda semana tem um tema novo com vídeo, vocabulário, música e desafio. Na Biblioteca, você encontra todas as semanas anteriores organizadas por nível.',
     gradient: 'from-[#9c441c] to-[#FC8E60]',
     iconBg: 'bg-[#FC8E60]/30',
     pattern: 'Estampa-Logo.png',
@@ -37,7 +37,7 @@ const steps = [
     icon: Users,
     title: 'Encontros ao Vivo',
     subtitle: 'Pratique com outras alunas',
-    description: 'Encontros online em grupo para praticar conversa\u00e7\u00e3o em franc\u00eas. Veja as datas na p\u00e1gina de Encontros e inscreva-se!',
+    description: 'Encontros online em grupo para praticar conversação em francês. Veja as datas na página de Encontros e inscreva-se!',
     gradient: 'from-[#303342] to-[#4a4d5e]',
     iconBg: 'bg-white/15',
     pattern: 'Estampa-Formas.png',
@@ -45,8 +45,8 @@ const steps = [
   {
     icon: MessageCircle,
     title: 'Comunidade',
-    subtitle: 'Seu espa\u00e7o para compartilhar',
-    description: 'Poste textos em franc\u00eas, grave \u00e1udios, tire d\u00favidas e interaja com outras alunas. A comunidade \u00e9 o cora\u00e7\u00e3o do Le Cercle!',
+    subtitle: 'Seu espaço para compartilhar',
+    description: 'Poste textos em francês, grave áudios, tire dúvidas e interaja com outras alunas. A comunidade é o coração do Le Cercle!',
     gradient: 'from-[#934655] to-[#FF9FAF]',
     iconBg: 'bg-[#FF9FAF]/30',
     pattern: 'Estampa-Logo.png',
@@ -55,7 +55,7 @@ const steps = [
     icon: Crown,
     title: 'Meu Plano',
     subtitle: 'Acompanhe sua assinatura',
-    description: 'Veja seus clubes ativos e o seu plano atual. Quer acesso a mais clubes? Fa\u00e7a um upgrade e desbloqueie todos!',
+    description: 'Veja seus clubes ativos e o seu plano atual. Quer acesso a mais clubes? Faça um upgrade e desbloqueie todos!',
     gradient: 'from-[#9c441c] to-[#FC8E60]',
     iconBg: 'bg-[#FC8E60]/30',
     pattern: 'Estampa-Formas.png',
@@ -63,8 +63,8 @@ const steps = [
   {
     icon: Music,
     title: 'Tudo pronto!',
-    subtitle: 'Sua jornada come\u00e7a agora',
-    description: 'Explore seus clubes, assista \u00e0s aulas e participe da comunidade. Bon courage et amusez-vous bien!',
+    subtitle: 'Sua jornada começa agora',
+    description: 'Explore seus clubes, assista às aulas e participe da comunidade. Bon courage et amusez-vous bien!',
     gradient: 'from-[#934655] to-[#FF9FAF]',
     iconBg: 'bg-[#FF9FAF]/30',
     pattern: 'Estampa-Logo.png',
@@ -142,7 +142,7 @@ export function WelcomeTour({ userName }: { userName: string }) {
                 <Icon className="h-8 w-8 text-white" />
               </div>
               {isFirst && (
-                <p className="text-white/70 text-sm mb-1">Ol\u00e1, {userName}!</p>
+                <p className="text-white/70 text-sm mb-1">{'Olá, '}{userName}!</p>
               )}
               <h2 className="text-2xl font-bold text-white tracking-tight">{step.title}</h2>
               <p className="text-white/60 text-xs font-semibold tracking-widest uppercase mt-1">{step.subtitle}</p>
@@ -193,7 +193,7 @@ export function WelcomeTour({ userName }: { userName: string }) {
                 }`}
                 style={{ borderTop: '1px solid rgba(255,255,255,0.15)' }}
               >
-                {isLast ? 'Come\u00e7ar!' : 'Pr\u00f3ximo'}
+                {isLast ? 'Começar!' : 'Próximo'}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
