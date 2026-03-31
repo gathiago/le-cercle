@@ -57,11 +57,23 @@ export default function MeuPlanoPage() {
   useEffect(() => {
     fetch('/api/my-clubs')
       .then(r => r.json())
-      .then(data => {
+      .then(async (data) => {
         const slugs = (data.clubs || []).map((c: any) => c.club?.slug || c.slug)
         setMyClubs(slugs)
         setSelected(isAll ? allClubs.map(c => c.slug) : slugs)
         setLoading(false)
+
+        // Auto-save all clubs for yearly/premium if none selected
+        if (isAll && slugs.length === 0) {
+          const allSlugs = allClubs.map(c => c.slug)
+          await fetch('/api/my-clubs', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ clubs: allSlugs }),
+          })
+          setMyClubs(allSlugs)
+          setSaved(true)
+        }
       })
       .catch(() => setLoading(false))
   }, [isAll])

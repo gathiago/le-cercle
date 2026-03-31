@@ -218,7 +218,7 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
                 disabled={loading}
                 className="w-full bg-[var(--color-laranja)] hover:bg-[var(--color-laranja-hover)] text-white rounded-xl"
               >
-                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : editingId ? 'Salvar Alteracoes' : 'Criar Clube'}
+                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : editingId ? 'Salvar Alterações' : 'Criar Clube'}
               </Button>
             </div>
           </DialogContent>
@@ -230,42 +230,37 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
           Nenhum clube criado ainda.
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {initialClubs.map((club) => (
             <div
               key={club.id}
-              className="bg-white rounded-2xl p-5 shadow-[0_4px_24px_rgba(48,51,66,0.06)] flex items-center justify-between"
+              className="bg-[var(--color-surface-lowest)] rounded-2xl overflow-hidden shadow-[0_4px_24px_rgba(48,51,66,0.06)] group"
             >
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-medium text-[var(--color-azul-escuro)]">{club.name}</h3>
-                  <span
-                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                      club.isActive
-                        ? 'bg-green-50 text-green-600'
-                        : 'bg-red-50 text-red-500'
-                    }`}
-                  >
+              {/* Thumbnail */}
+              <div className="relative h-36 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)]">
+                {(club as any).imageUrl && (
+                  <img src={(club as any).imageUrl} alt={club.name} className="absolute inset-0 w-full h-full object-cover" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4">
+                  <h3 className="text-white font-bold">{club.name}</h3>
+                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${club.isActive ? 'bg-green-500/80 text-white' : 'bg-red-500/80 text-white'}`}>
                     {club.isActive ? 'Ativo' : 'Inativo'}
                   </span>
                 </div>
-                <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                  <span>Plano min: {planLabel(club.minPlan)}</span>
-                  <span className="flex items-center gap-1">
-                    <BookOpen className="h-3 w-3" /> {club.courseCount} cursos
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Users className="h-3 w-3" /> {club.memberCount} membros
-                  </span>
-                </div>
               </div>
-              <button
-                onClick={() => editClub(club)}
-                className="p-2 rounded-xl hover:bg-[var(--color-surface-low)] text-muted-foreground"
-                title="Editar"
-              >
-                <Pencil className="h-4 w-4" />
-              </button>
+              {/* Info */}
+              <div className="p-4">
+                <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
+                  <span>{planLabel(club.minPlan)}</span>
+                  <span className="flex items-center gap-1"><BookOpen className="h-3 w-3" /> {club.courseCount}</span>
+                  <span className="flex items-center gap-1"><Users className="h-3 w-3" /> {club.memberCount}</span>
+                </div>
+                <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{club.description}</p>
+                <button onClick={() => editClub(club)} className="text-xs font-semibold text-[var(--color-laranja)] hover:text-[var(--color-laranja-hover)]">
+                  Editar clube
+                </button>
+              </div>
             </div>
           ))}
         </div>

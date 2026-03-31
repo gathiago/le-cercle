@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -18,6 +18,14 @@ function ProdutoContent() {
   const [error, setError] = useState('')
   const [downloadUrl, setDownloadUrl] = useState('')
   const [form, setForm] = useState({ name: '', email: '', phone: '' })
+  const [product, setProduct] = useState<{ title: string; price: number; description: string } | null>(null)
+
+  useEffect(() => {
+    fetch(`/api/products/${slug}/info`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data) setProduct(data) })
+      .catch(() => {})
+  }, [slug])
 
   function formatPhone(value: string) {
     const digits = value.replace(/\D/g, '').slice(0, 11)
@@ -99,6 +107,18 @@ function ProdutoContent() {
           </div>
 
           <div className="bg-[var(--color-surface-low)] rounded-xl p-5 mb-5 space-y-3">
+            {product && (
+              <>
+                <div className="flex justify-between text-sm">
+                  <span className="text-[var(--color-azul-escuro)]/35">Produto</span>
+                  <span className="font-medium text-[var(--color-azul-escuro)]">{product.title}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-[var(--color-azul-escuro)]/35">Valor</span>
+                  <span className="font-bold text-[var(--color-azul-escuro)]">R$ {product.price.toFixed(2)}</span>
+                </div>
+              </>
+            )}
             <div className="flex justify-between text-sm">
               <span className="text-[var(--color-azul-escuro)]/35">Nome</span>
               <span className="font-medium text-[var(--color-azul-escuro)]">{form.name}</span>
@@ -142,6 +162,15 @@ function ProdutoContent() {
   return (
     <div className="max-w-md mx-auto px-4 pt-8">
       <div className="bg-[var(--color-surface-lowest)] rounded-[2rem] p-8 shadow-[0_16px_48px_-12px_rgba(48,51,66,0.06)]">
+        {product && (
+          <div className="bg-[var(--color-surface-low)] rounded-xl p-4 mb-6 flex justify-between items-center">
+            <div>
+              <p className="font-bold text-[var(--color-azul-escuro)] text-sm">{product.title}</p>
+              <p className="text-xs text-[var(--color-azul-escuro)]/35">Produto digital</p>
+            </div>
+            <p className="text-lg font-bold text-[var(--color-azul-escuro)]">R$ {product.price.toFixed(2)}</p>
+          </div>
+        )}
         <h2 className="text-xl font-bold text-[var(--color-azul-escuro)] tracking-tight mb-1">Finalizar compra</h2>
         <p className="text-sm text-[var(--color-azul-escuro)]/35 mb-7">Preencha seus dados para continuar.</p>
 
