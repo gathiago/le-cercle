@@ -42,7 +42,7 @@ export default function NewsletterPage() {
     <div className="min-h-[100dvh] bg-[var(--color-surface)] relative overflow-hidden">
       {/* Background pattern */}
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
           backgroundImage: 'url(/Estampa-Logo.png)',
           backgroundSize: '180px',

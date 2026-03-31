@@ -141,6 +141,8 @@ model Lesson {
   title       String
   description String?  @db.Text
   videoUrl    String?  @db.Text
+  materialUrl String?  @db.Text       // PDF/material da aula
+  materialName String?                // nome do arquivo
   content     String?  @db.LongText
   duration    Int?                    // minutos
   courseId    String

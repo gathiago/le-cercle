@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Plus, Pencil, Trash2, Loader2, PlayCircle, Clock } from 'lucide-react'
+import { Plus, Pencil, Trash2, Loader2, PlayCircle, Clock, Upload, FileText } from 'lucide-react'
 
 interface Lesson {
   id: string
@@ -16,6 +16,8 @@ interface Lesson {
   slug: string
   description: string | null
   videoUrl: string | null
+  materialUrl: string | null
+  materialName: string | null
   content: string | null
   duration: number | null
   sortOrder: number
@@ -42,12 +44,15 @@ export function AdminLessonsManager({
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState({
     title: '',
     slug: '',
     description: '',
     videoUrl: '',
+    materialUrl: '',
+    materialName: '',
     content: '',
     duration: '',
     sortOrder: '',
@@ -60,6 +65,8 @@ export function AdminLessonsManager({
       slug: '',
       description: '',
       videoUrl: '',
+      materialUrl: '',
+      materialName: '',
       content: '',
       duration: '',
       sortOrder: String(initialLessons.length + 1),
@@ -74,6 +81,8 @@ export function AdminLessonsManager({
       slug: lesson.slug,
       description: lesson.description || '',
       videoUrl: lesson.videoUrl || '',
+      materialUrl: lesson.materialUrl || '',
+      materialName: lesson.materialName || '',
       content: lesson.content || '',
       duration: lesson.duration != null ? String(lesson.duration) : '',
       sortOrder: String(lesson.sortOrder),
@@ -105,6 +114,8 @@ export function AdminLessonsManager({
         duration: form.duration ? Number(form.duration) : null,
         sortOrder: form.sortOrder ? Number(form.sortOrder) : 0,
         videoUrl: form.videoUrl || null,
+        materialUrl: form.materialUrl || null,
+        materialName: form.materialName || null,
         content: form.content || null,
         description: form.description || null,
       }),
@@ -168,7 +179,41 @@ export function AdminLessonsManager({
                 />
               </div>
               <div>
-                <Label>Conteudo da Aula (notas)</Label>
+                <Label>Material da aula (PDF)</Label>
+                <div className="flex gap-2">
+                  <Input
+                    value={form.materialUrl}
+                    onChange={(e) => setForm((f) => ({ ...f, materialUrl: e.target.value }))}
+                    placeholder="URL ou faça upload..."
+                    className="bg-[var(--color-surface-low)] border-none rounded-xl flex-1"
+                  />
+                  <label className="inline-flex items-center justify-center gap-1.5 bg-[var(--color-rosa)] hover:bg-[var(--color-rosa-hover)] text-white rounded-xl px-3 py-2 text-xs font-medium cursor-pointer transition-colors shrink-0">
+                    {uploading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Upload className="h-3.5 w-3.5" />}
+                    Upload
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx"
+                      className="hidden"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        if (!file) return
+                        setUploading(true)
+                        const fd = new FormData()
+                        fd.append('file', file)
+                        const res = await fetch('/api/admin/products/upload', { method: 'POST', body: fd })
+                        if (res.ok) {
+                          const data = await res.json()
+                          setForm(f => ({ ...f, materialUrl: data.fileUrl, materialName: data.fileName }))
+                        }
+                        setUploading(false)
+                      }}
+                    />
+                  </label>
+                </div>
+                {form.materialUrl && <p className="text-xs text-green-600 mt-1 flex items-center gap-1"><FileText className="h-3 w-3" /> {form.materialName || form.materialUrl}</p>}
+              </div>
+              <div>
+                <Label>Conteúdo da Aula (notas)</Label>
                 <Textarea
                   value={form.content}
                   onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))}
