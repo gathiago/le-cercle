@@ -52,6 +52,7 @@ model User {
   acceptedTerms       Boolean   @default(true)
   acceptedTermsAt     DateTime?
   onboardingDone      Boolean   @default(false)
+  tourDone            Boolean   @default(false)
   onboardingAnswer    String?   @db.Text
   blockReason         String?
   createdAt           DateTime  @default(now())

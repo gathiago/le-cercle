@@ -5,6 +5,7 @@ import { ArrowRight, Music, Play, BookText, Heart, MessageCircle, Lock } from 'l
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
+import { WelcomeTour } from '@/components/tour/welcome-tour'
 
 const clubSubtitles: Record<string, string> = {
   'Premiers Pas Club': 'Clube de Iniciantes',
@@ -20,6 +21,11 @@ export default async function DashboardPage() {
   if (!session?.user) redirect('/login')
 
   const user = session.user
+
+  const currentUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: { tourDone: true },
+  })
 
   const [activeWeek, userClubMemberships, allClubs, recentPosts] = await Promise.all([
     prisma.weekContent.findFirst({
@@ -55,8 +61,12 @@ export default async function DashboardPage() {
     return a.sortOrder - b.sortOrder
   })
 
+  const showTour = !currentUser?.tourDone
+
   return (
     <div className="max-w-6xl mx-auto">
+      {showTour && <WelcomeTour userName={user.name?.split(' ')[0] || ''} />}
+
       {/* Greeting */}
       <div className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-[var(--color-azul-escuro)]">
