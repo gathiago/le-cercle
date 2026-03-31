@@ -13,7 +13,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'Le Cercle | Idiomas com Mardia',
-  description: 'Plataforma de imersao em frances. Pratique, aprenda e conecte-se com uma comunidade exclusiva.',
+  description: 'Plataforma de imersão em francês. Pratique, aprenda e conecte-se com uma comunidade exclusiva.',
 }
 
 export default function RootLayout({

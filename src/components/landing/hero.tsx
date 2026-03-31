@@ -26,15 +26,15 @@ export function LandingHero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-[var(--color-azul-escuro)] tracking-tighter leading-[1.05] mb-6">
-            Fale frances com
+            Fale francês com
             <br />
-            <span className="text-[var(--color-rosa)]">confianca</span> e prazer.
+            <span className="text-[var(--color-rosa)]">confiança</span> e prazer.
           </h1>
 
           <p className="text-lg text-[var(--color-azul-escuro)]/45 leading-relaxed max-w-[48ch] mb-10">
-            Conteudo semanal, encontros ao vivo e uma comunidade
-            apaixonada por frances. Sem gramatica decorada.
-            Com cultura, pratica e conexao real.
+            Conteúdo semanal, encontros ao vivo e uma comunidade
+            apaixonada por francês. Sem gramática decorada.
+            Com cultura, prática e conexão real.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start gap-4 mb-14">
@@ -46,7 +46,7 @@ export function LandingHero() {
               Quero fazer parte
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-0.5 transition-transform" weight="bold" />
             </Link>
-            <span className="text-sm text-[var(--color-azul-escuro)]/30 self-center">A partir de R$ 34,99/mes</span>
+            <span className="text-sm text-[var(--color-azul-escuro)]/30 self-center">A partir de R$ 34,99/mês</span>
           </div>
 
           {/* Social proof */}

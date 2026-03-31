@@ -20,34 +20,34 @@ interface Question {
 const questions: Question[] = [
   {
     id: 1,
-    question: 'Se voce tivesse que se apresentar em frances agora...',
-    subtitle: 'Seja honesta — nao ha resposta errada.',
+    question: 'Se você tivesse que se apresentar em francês agora...',
+    subtitle: 'Seja honesta — não há resposta errada.',
     type: 'select',
     options: [
-      { label: 'Nao conseguiria falar nada', value: 1 },
+      { label: 'Não conseguiria falar nada', value: 1 },
       { label: 'Diria meu nome com dificuldade', value: 2 },
       { label: 'Conseguiria me apresentar basicamente', value: 3 },
-      { label: 'Faria uma apresentacao completa', value: 4 },
+      { label: 'Faria uma apresentação completa', value: 4 },
     ],
   },
   {
     id: 2,
     question: 'Complete: "Je m\'appelle __ et j\'aime __"',
-    subtitle: 'Como voce se sai com frases simples?',
+    subtitle: 'Como você se sai com frases simples?',
     type: 'select',
     options: [
-      { label: 'Nao entendi a frase', value: 1 },
-      { label: 'Sei o que significa mas nao completaria', value: 2 },
+      { label: 'Não entendi a frase', value: 1 },
+      { label: 'Sei o que significa mas não completaria', value: 2 },
       { label: 'Completaria com palavras simples', value: 3 },
     ],
   },
   {
     id: 3,
-    question: 'Quando voce escuta frances...',
-    subtitle: 'Pense em uma musica ou filme.',
+    question: 'Quando você escuta francês...',
+    subtitle: 'Pense em uma música ou filme.',
     type: 'select',
     options: [
-      { label: 'Nao entendo nada', value: 1 },
+      { label: 'Não entendo nada', value: 1 },
       { label: 'Identifico algumas palavras', value: 2 },
       { label: 'Entendo o contexto geral', value: 3 },
       { label: 'Entendo quase tudo', value: 4 },
@@ -55,20 +55,20 @@ const questions: Question[] = [
   },
   {
     id: 4,
-    question: 'Voce ja estudou frances?',
+    question: 'Você já estudou francês?',
     subtitle: 'Qualquer forma de estudo conta.',
     type: 'select',
     options: [
       { label: 'Nunca estudei', value: 1 },
-      { label: 'Sozinha, apps ou videos', value: 2 },
-      { label: 'Fiz um curso basico', value: 3 },
-      { label: 'Curso avancado ou vivencia', value: 4 },
+      { label: 'Sozinha, apps ou vídeos', value: 2 },
+      { label: 'Fiz um curso básico', value: 3 },
+      { label: 'Curso avançado ou vivência', value: 4 },
     ],
   },
   {
     id: 5,
-    question: 'Se alguem fala com voce em frances...',
-    subtitle: 'Imagine a situacao.',
+    question: 'Se alguém fala com você em francês...',
+    subtitle: 'Imagine a situação.',
     type: 'select',
     options: [
       { label: 'Ficaria paralisada', value: 1 },
@@ -79,14 +79,14 @@ const questions: Question[] = [
   },
   {
     id: 6,
-    question: 'Voce consegue ler textos simples em frances?',
+    question: 'Você consegue ler textos simples em francês?',
     subtitle: 'Um menu, uma placa, um post...',
     type: 'select',
     options: [
-      { label: 'Nao', value: 1 },
+      { label: 'Não', value: 1 },
       { label: 'Com muita dificuldade', value: 2 },
-      { label: 'Sim, textos basicos', value: 3 },
-      { label: 'Sim, ate textos complexos', value: 4 },
+      { label: 'Sim, textos básicos', value: 3 },
+      { label: 'Sim, até textos complexos', value: 4 },
     ],
   },
   {
@@ -97,24 +97,24 @@ const questions: Question[] = [
     field: 'blockReason',
     options: [
       { label: 'Medo de errar', value: 'medo_errar' },
-      { label: 'Falta de vocabulario', value: 'vocabulario' },
-      { label: 'Falta de pratica', value: 'falta_pratica' },
+      { label: 'Falta de vocabulário', value: 'vocabulario' },
+      { label: 'Falta de prática', value: 'falta_pratica' },
       { label: 'Dificuldade de escuta', value: 'escuta' },
     ],
   },
   {
     id: 8,
-    question: 'Por que voce entrou no Le Cercle?',
-    subtitle: 'Conte um pouco da sua motivacao.',
+    question: 'Por que você entrou no Le Cercle?',
+    subtitle: 'Conte um pouco da sua motivação.',
     type: 'text',
     field: 'openAnswer',
   },
 ]
 
 const levelMessages = {
-  INICIANTE: { title: 'Bienvenue!', message: 'Vamos construir seu frances do zero, juntas.', color: 'from-emerald-500 to-emerald-400' },
-  INTERMEDIARIO: { title: 'Tres bien!', message: 'Voce ja tem uma base otima. Hora de destravar a fala.', color: 'from-[var(--color-laranja)] to-amber-400' },
-  AVANCADO: { title: 'Magnifique!', message: 'Voce esta pronta pra voar. Debates, cultura e fluencia real.', color: 'from-[var(--color-primary)] to-[var(--color-rosa)]' },
+  INICIANTE: { title: 'Bienvenue!', message: 'Vamos construir seu francês do zero, juntas.', color: 'from-emerald-500 to-emerald-400' },
+  INTERMEDIARIO: { title: 'Très bien!', message: 'Você já tem uma base ótima. Hora de destravar a fala.', color: 'from-[var(--color-laranja)] to-amber-400' },
+  AVANCADO: { title: 'Magnifique!', message: 'Você está pronta pra voar. Debates, cultura e fluência real.', color: 'from-[var(--color-primary)] to-[var(--color-rosa)]' },
 }
 
 export default function OnboardingPage() {
@@ -277,9 +277,9 @@ export default function OnboardingPage() {
             {loading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
             ) : step === totalSteps - 1 ? (
-              'Descobrir meu nivel'
+              'Descobrir meu nível'
             ) : (
-              <>Proxima <ArrowRight className="ml-2 h-5 w-5" weight="bold" /></>
+              <>Próxima <ArrowRight className="ml-2 h-5 w-5" weight="bold" /></>
             )}
           </Button>
 

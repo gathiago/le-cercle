@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth()
-  if (session?.user?.role !== 'ADMIN') return NextResponse.json({ error: 'Nao autorizado' }, { status: 403 })
+  if (session?.user?.role !== 'ADMIN') return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
 
   const { id } = await params
   const data = await request.json()
@@ -23,7 +23,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth()
-  if (session?.user?.role !== 'ADMIN') return NextResponse.json({ error: 'Nao autorizado' }, { status: 403 })
+  if (session?.user?.role !== 'ADMIN') return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
   const { id } = await params
   await prisma.meeting.delete({ where: { id } })
   return NextResponse.json({ success: true })

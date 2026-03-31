@@ -14,14 +14,14 @@ import { Loader2 } from 'lucide-react'
 import { ArrowLeft, CreditCard, ShieldCheck, CheckCircle } from '@phosphor-icons/react'
 
 const schema = z.object({
-  name: z.string().min(3, 'Minimo 3 caracteres'),
-  email: z.string().email('E-mail invalido'),
-  password: z.string().min(6, 'Minimo 6 caracteres'),
+  name: z.string().min(3, 'Mínimo 3 caracteres'),
+  email: z.string().email('E-mail inválido'),
+  password: z.string().min(6, 'Mínimo 6 caracteres'),
   confirmPassword: z.string(),
   phone: z.string().optional(),
-  acceptedTerms: z.literal(true, { message: 'Voce precisa aceitar os termos' }),
+  acceptedTerms: z.literal(true, { message: 'Você precisa aceitar os termos' }),
 }).refine(data => data.password === data.confirmPassword, {
-  message: 'As senhas nao coincidem',
+  message: 'As senhas não coincidem',
   path: ['confirmPassword'],
 })
 
@@ -172,7 +172,7 @@ function CadastroContent() {
 
           <div className="space-y-2">
             <Label className="text-xs font-semibold text-[var(--color-azul-escuro)]/50 uppercase tracking-wider">Senha</Label>
-            <Input type="password" placeholder="Minimo 6 caracteres" className="bg-[var(--color-surface-low)] h-12 rounded-xl text-[var(--color-azul-escuro)] placeholder:text-[var(--color-azul-escuro)]/20 focus-visible:ring-[var(--color-rosa)]/30 focus-visible:bg-[var(--color-surface-lowest)]" {...register('password')} />
+            <Input type="password" placeholder="Mínimo 6 caracteres" className="bg-[var(--color-surface-low)] h-12 rounded-xl text-[var(--color-azul-escuro)] placeholder:text-[var(--color-azul-escuro)]/20 focus-visible:ring-[var(--color-rosa)]/30 focus-visible:bg-[var(--color-surface-lowest)]" {...register('password')} />
             {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
           </div>
 

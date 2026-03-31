@@ -35,18 +35,18 @@ export default function LandingPage() {
           <div>
             <p className="text-[var(--color-rosa)] text-xs font-semibold tracking-[3px] uppercase mb-6">O problema</p>
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-white tracking-tight leading-[1.1] mb-6">
-              Voce estuda frances mas
+              Você estuda francês mas
               na hora de falar,{' '}
               <span className="text-white/30">trava.</span>
             </h2>
             <p className="text-white/40 leading-relaxed max-w-[50ch]">
-              A maioria dos cursos foca em gramatica isolada. No Le Cercle, voce pratica desde o primeiro dia &mdash; com pessoas reais, conteudo cultural e a orientacao da Mardia.
+              A maioria dos cursos foca em gramática isolada. No Le Cercle, você pratica desde o primeiro dia &mdash; com pessoas reais, conteúdo cultural e a orientação da Mardia.
             </p>
           </div>
           <div className="space-y-4">
             {[
-              { before: 'Medo de falar', after: 'Confianca pra conversar' },
-              { before: 'Gramatica no papel', after: 'Pratica com cultura real' },
+              { before: 'Medo de falar', after: 'Confiança pra conversar' },
+              { before: 'Gramática no papel', after: 'Prática com cultura real' },
               { before: 'Estudar sozinha', after: 'Comunidade que apoia' },
             ].map((item) => (
               <div key={item.before} className="bg-white/[0.04] rounded-2xl p-5 flex items-center gap-5" style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)' }}>
@@ -85,10 +85,10 @@ export default function LandingPage() {
               Professora, criadora e apaixonada pela cultura francesa.
             </h2>
             <p className="text-[var(--color-azul-escuro)]/50 leading-relaxed max-w-[50ch] mb-7">
-              Com anos de experiencia ensinando de forma pratica e acolhedora, Mardia criou o Le Cercle para quem quer mais do que decorar regras &mdash; quer viver o frances.
+              Com anos de experiência ensinando de forma prática e acolhedora, Mardia criou o Le Cercle para quem quer mais do que decorar regras &mdash; quer viver o francês.
             </p>
             <div className="flex flex-wrap gap-3">
-              {['Imersao cultural', 'Metodo acolhedor', 'Pratica real', 'Grupos pequenos'].map((tag) => (
+              {['Imersão cultural', 'Método acolhedor', 'Prática real', 'Grupos pequenos'].map((tag) => (
                 <span key={tag} className="text-xs font-medium text-[var(--color-azul-escuro)]/60 bg-[var(--color-surface-lowest)] rounded-full px-4 py-1.5 shadow-[0_2px_8px_rgba(48,51,66,0.04)]">
                   {tag}
                 </span>

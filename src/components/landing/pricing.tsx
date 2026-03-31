@@ -7,10 +7,10 @@ import { Check, Lightning } from '@phosphor-icons/react'
 const spring = { type: 'spring' as const, stiffness: 100, damping: 20 }
 
 const plans = [
-  { id: 'monthly', name: 'Mensal', price: '49,90', monthly: '49,90', period: null, features: ['Conteudo semanal', 'Comunidade', 'Encontros online'] },
+  { id: 'monthly', name: 'Mensal', price: '49,90', monthly: '49,90', period: null, features: ['Conteúdo semanal', 'Comunidade', 'Encontros online'] },
   { id: 'quarterly', name: 'Trimestral', price: '127,70', monthly: '42,57', period: 'por trimestre', badge: '-15%', features: ['Tudo do Mensal', 'Material PDF', 'Economia de 15%'] },
   { id: 'yearly', name: 'Anual', price: '419,90', monthly: '34,99', period: 'anualmente', badge: 'Popular', popular: true, features: ['Tudo do Mensal', 'Prioridade encontros', 'Economia de 30%'] },
-  { id: 'premium', name: 'Premium', price: '899,90', monthly: '74,99', period: 'anualmente', badge: 'Exclusivo', premium: true, features: ['Acesso total', 'Eventos presenciais', 'Experiencia VIP'] },
+  { id: 'premium', name: 'Premium', price: '899,90', monthly: '74,99', period: 'anualmente', badge: 'Exclusivo', premium: true, features: ['Acesso total', 'Eventos presenciais', 'Experiência VIP'] },
 ]
 
 export function LandingPricing() {
@@ -61,7 +61,7 @@ export function LandingPricing() {
               <div className="mb-1">
                 <span className={`text-sm ${plan.premium ? 'text-white/40' : 'text-[var(--color-azul-escuro)]/30'}`}>R$</span>
                 <span className={`text-3xl font-bold tracking-tight ${plan.premium ? 'text-white' : 'text-[var(--color-azul-escuro)]'}`}>{plan.monthly}</span>
-                <span className={`text-sm ${plan.premium ? 'text-white/40' : 'text-[var(--color-azul-escuro)]/30'}`}>/mes</span>
+                <span className={`text-sm ${plan.premium ? 'text-white/40' : 'text-[var(--color-azul-escuro)]/30'}`}>/mês</span>
               </div>
 
               {plan.period && <p className={`text-xs mb-5 ${plan.premium ? 'text-white/25' : 'text-[var(--color-azul-escuro)]/30'}`}>R$ {plan.price} {plan.period}</p>}

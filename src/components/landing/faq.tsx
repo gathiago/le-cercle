@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Plus } from '@phosphor-icons/react'
 
 const faqs = [
-  { q: 'Preciso saber frances para entrar?', a: 'Nao! Temos conteudo para todos os niveis. No onboarding, descobrimos seu nivel e personalizamos sua experiencia desde o primeiro dia.' },
-  { q: 'Como funcionam os encontros ao vivo?', a: 'Sao encontros semanais por videoconferencia com grupos pequenos (maximo 8 pessoas). Pratica de conversacao guiada pela Mardia em um ambiente acolhedor.' },
-  { q: 'Posso cancelar quando quiser?', a: 'Sim, sem multa e sem burocracia. Voce mantem acesso ate o final do periodo pago.' },
-  { q: 'O que e o plano Premium?', a: 'Alem de todo o conteudo online, voce participa de encontros presenciais exclusivos em cidades do Brasil. Cafes, workshops e imersoes culturais.' },
-  { q: 'Como funciona o pagamento?', a: 'Aceitamos PIX, cartao de credito e boleto. Aprovacao instantanea para PIX e cartao. Acesso liberado imediatamente apos o pagamento.' },
+  { q: 'Preciso saber francês para entrar?', a: 'Não! Temos conteúdo para todos os níveis. No onboarding, descobrimos seu nível e personalizamos sua experiência desde o primeiro dia.' },
+  { q: 'Como funcionam os encontros ao vivo?', a: 'São encontros semanais por videoconferência com grupos pequenos (máximo 8 pessoas). Prática de conversação guiada pela Mardia em um ambiente acolhedor.' },
+  { q: 'Posso cancelar quando quiser?', a: 'Sim, sem multa e sem burocracia. Você mantém acesso até o final do período pago.' },
+  { q: 'O que é o plano Premium?', a: 'Além de todo o conteúdo online, você participa de encontros presenciais exclusivos em cidades do Brasil. Cafés, workshops e imersões culturais.' },
+  { q: 'Como funciona o pagamento?', a: 'Aceitamos PIX, cartão de crédito e boleto. Aprovação instantânea para PIX e cartão. Acesso liberado imediatamente após o pagamento.' },
 ]
 
 export function LandingFaq() {

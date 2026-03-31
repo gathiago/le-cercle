@@ -8,7 +8,7 @@ export async function PUT(
 ) {
   const session = await auth()
   if (session?.user?.role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Nao autorizado' }, { status: 403 })
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
   }
 
   const { id } = await params
@@ -45,7 +45,7 @@ export async function DELETE(
 ) {
   const session = await auth()
   if (session?.user?.role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Nao autorizado' }, { status: 403 })
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 403 })
   }
 
   const { id } = await params

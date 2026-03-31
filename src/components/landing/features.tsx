@@ -6,10 +6,10 @@ import { BookOpen, Microphone, UsersThree, MapPin } from '@phosphor-icons/react'
 const spring = { type: 'spring' as const, stiffness: 100, damping: 20 }
 
 const features = [
-  { icon: BookOpen, title: 'Conteudo Semanal', desc: 'Videos, musicas, vocabulario e exercicios novos toda semana. Aprenda no seu ritmo com conteudo cultural imersivo.', accent: 'from-[var(--color-primary)] to-[var(--color-rosa)]' },
-  { icon: Microphone, title: 'Encontros ao Vivo', desc: 'Conversacao real com grupos pequenos de ate 8 pessoas. Desbloqueie sua fala com pratica guiada pela Mardia.', accent: 'from-[var(--color-secondary)] to-[var(--color-laranja)]' },
-  { icon: UsersThree, title: 'Comunidade Exclusiva', desc: 'Compartilhe progresso, tire duvidas e faca amizades com quem ama o frances. Apoio diario dentro do grupo.', accent: 'from-emerald-600 to-emerald-400' },
-  { icon: MapPin, title: 'Eventos Presenciais', desc: 'Cafes, workshops e encontros em cidades do Brasil. Imersao alem da tela, exclusivo para membros Premium.', accent: 'from-amber-600 to-amber-400' },
+  { icon: BookOpen, title: 'Conteúdo Semanal', desc: 'Vídeos, músicas, vocabulário e exercícios novos toda semana. Aprenda no seu ritmo com conteúdo cultural imersivo.', accent: 'from-[var(--color-primary)] to-[var(--color-rosa)]' },
+  { icon: Microphone, title: 'Encontros ao Vivo', desc: 'Conversação real com grupos pequenos de até 8 pessoas. Desbloqueie sua fala com prática guiada pela Mardia.', accent: 'from-[var(--color-secondary)] to-[var(--color-laranja)]' },
+  { icon: UsersThree, title: 'Comunidade Exclusiva', desc: 'Compartilhe progresso, tire dúvidas e faça amizades com quem ama o francês. Apoio diário dentro do grupo.', accent: 'from-emerald-600 to-emerald-400' },
+  { icon: MapPin, title: 'Eventos Presenciais', desc: 'Cafés, workshops e encontros em cidades do Brasil. Imersão além da tela, exclusivo para membros Premium.', accent: 'from-amber-600 to-amber-400' },
 ]
 
 export function LandingFeatures() {
@@ -19,7 +19,7 @@ export function LandingFeatures() {
         <div className="mb-16">
           <p className="text-[var(--color-rosa)] text-xs font-semibold tracking-[3px] uppercase mb-4">Como funciona</p>
           <h2 className="text-3xl md:text-[2.75rem] font-bold text-[var(--color-azul-escuro)] tracking-tight leading-[1.1] max-w-[40ch]">
-            Tudo que voce precisa para falar frances de verdade.
+            Tudo que você precisa para falar francês de verdade.
           </h2>
         </div>
 

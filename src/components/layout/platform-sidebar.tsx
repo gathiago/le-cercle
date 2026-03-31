@@ -21,7 +21,7 @@ interface PlatformSidebarProps {
 export function PlatformSidebar({ user }: PlatformSidebarProps) {
   const pathname = usePathname()
 
-  const levelLabel = user.level === 'INTERMEDIARIO' ? 'Intermediario' : user.level === 'AVANCADO' ? 'Avancado' : 'Iniciante'
+  const levelLabel = user.level === 'INTERMEDIARIO' ? 'Intermediário' : user.level === 'AVANCADO' ? 'Avançado' : 'Iniciante'
 
   return (
     <>

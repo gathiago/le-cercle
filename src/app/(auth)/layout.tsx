@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             Votre voyage<br />commence ici.
           </h2>
           <p className="text-white/50 text-base max-w-[35ch] leading-relaxed">
-            Conteudo semanal, encontros ao vivo e uma comunidade apaixonada por frances.
+            Conteúdo semanal, encontros ao vivo e uma comunidade apaixonada por francês.
           </p>
           <div className="flex items-center gap-3 mt-8">
             <div className="flex -space-x-2">

@@ -20,12 +20,12 @@ export function LandingCta() {
         className="max-w-3xl mx-auto text-center relative"
       >
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5">
-          Sua jornada no frances
+          Sua jornada no francês
           <br />
-          comeca aqui.
+          começa aqui.
         </h2>
         <p className="text-white/60 text-lg mb-10 max-w-[42ch] mx-auto leading-relaxed">
-          Junte-se a centenas de alunas que ja transformaram sua relacao com o idioma.
+          Junte-se a centenas de alunas que já transformaram sua relação com o idioma.
         </p>
         <Link
           href="/checkout"

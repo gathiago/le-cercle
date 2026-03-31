@@ -163,7 +163,7 @@ export default function CheckoutPage() {
           </Button>
         </div>
         {couponValid === true && <p className="text-sm text-emerald-600 mt-2 font-medium">Cupom aplicado com sucesso</p>}
-        {couponValid === false && <p className="text-sm text-red-500 mt-2">Cupom invalido ou expirado.</p>}
+        {couponValid === false && <p className="text-sm text-red-500 mt-2">Cupom inválido ou expirado.</p>}
       </div>
 
       {/* CTA */}
@@ -177,7 +177,7 @@ export default function CheckoutPage() {
           <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-0.5 transition-transform" weight="bold" />
         </button>
         <p className="text-xs text-[var(--color-azul-escuro)]/25 mt-4">
-          Ja tem uma conta? <a href="/login" className="text-[var(--color-laranja)] font-medium">Entrar</a>
+          Já tem uma conta? <a href="/login" className="text-[var(--color-laranja)] font-medium">Entrar</a>
         </p>
       </div>
     </div>

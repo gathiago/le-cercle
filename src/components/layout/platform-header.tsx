@@ -8,7 +8,7 @@ interface PlatformHeaderProps {
 }
 
 export function PlatformHeader({ user }: PlatformHeaderProps) {
-  const levelLabel = user.level === 'INTERMEDIARIO' ? 'Intermediario' : user.level === 'AVANCADO' ? 'Avancado' : 'Iniciante'
+  const levelLabel = user.level === 'INTERMEDIARIO' ? 'Intermediário' : user.level === 'AVANCADO' ? 'Avançado' : 'Iniciante'
 
   return (
     <header className="flex items-center justify-between px-5 md:px-8 py-4 bg-[var(--color-surface)]/80 backdrop-blur-[20px] sticky top-0 z-30">

@@ -5,7 +5,7 @@ import { uploadAudio, uploadImage } from '@/lib/storage'
 export async function POST(request: Request) {
   const session = await auth()
   if (!session?.user?.id) {
-    return NextResponse.json({ error: 'Nao autenticado' }, { status: 401 })
+    return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
   }
 
   try {

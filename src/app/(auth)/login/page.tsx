@@ -14,8 +14,8 @@ import { Loader2 } from 'lucide-react'
 import { ArrowRight } from '@phosphor-icons/react'
 
 const loginSchema = z.object({
-  email: z.string().email('E-mail invalido'),
-  password: z.string().min(6, 'Minimo 6 caracteres'),
+  email: z.string().email('E-mail inválido'),
+  password: z.string().min(6, 'Mínimo 6 caracteres'),
 })
 
 type LoginForm = z.infer<typeof loginSchema>
@@ -109,7 +109,7 @@ export default function LoginPage() {
       </form>
 
       <p className="text-center text-sm text-[var(--color-azul-escuro)]/30 mt-8">
-        Ainda nao e membro?{' '}
+        Ainda não é membro?{' '}
         <Link href="/checkout" className="text-[var(--color-laranja)] font-semibold hover:text-[var(--color-laranja-hover)] transition-colors">
           Assine agora
         </Link>

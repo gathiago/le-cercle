@@ -6,9 +6,9 @@ import { Star, Quotes } from '@phosphor-icons/react'
 const spring = { type: 'spring' as const, stiffness: 100, damping: 20 }
 
 const testimonials = [
-  { name: 'Isadora B.', level: 'Iniciante para Intermediario', text: 'Em 3 meses consegui me apresentar em frances sem travar. O metodo da Mardia faz voce perder o medo naturalmente.', initials: 'IB', gradient: 'from-[var(--color-primary)] to-[var(--color-rosa)]' },
-  { name: 'Thiago R.', level: 'Intermediario', text: 'Os encontros ao vivo mudaram tudo. Praticar com outras pessoas fez eu perder o medo de falar. Ja consigo manter conversas inteiras.', initials: 'TR', gradient: 'from-[var(--color-secondary)] to-[var(--color-laranja)]' },
-  { name: 'Carolina M.', level: 'Avancado', text: 'A comunidade e o diferencial. Nao e so um curso, e uma imersao real na cultura francesa. Me sinto parte de algo especial.', initials: 'CM', gradient: 'from-emerald-600 to-teal-400' },
+  { name: 'Isadora B.', level: 'Iniciante para Intermediário', text: 'Em 3 meses consegui me apresentar em francês sem travar. O método da Mardia faz você perder o medo naturalmente.', initials: 'IB', gradient: 'from-[var(--color-primary)] to-[var(--color-rosa)]' },
+  { name: 'Thiago R.', level: 'Intermediário', text: 'Os encontros ao vivo mudaram tudo. Praticar com outras pessoas fez eu perder o medo de falar. Já consigo manter conversas inteiras.', initials: 'TR', gradient: 'from-[var(--color-secondary)] to-[var(--color-laranja)]' },
+  { name: 'Carolina M.', level: 'Avançado', text: 'A comunidade é o diferencial. Não é só um curso, é uma imersão real na cultura francesa. Me sinto parte de algo especial.', initials: 'CM', gradient: 'from-emerald-600 to-teal-400' },
 ]
 
 export function LandingTestimonials() {
