@@ -24,12 +24,12 @@ export default auth((req) => {
     return NextResponse.next()
   }
 
-  // Root redirect
+  // Root: landing page for visitors, dashboard for logged-in
   if (pathname === '/') {
     if (session?.user) {
       return NextResponse.redirect(new URL('/dashboard', nextUrl))
     }
-    return NextResponse.redirect(new URL('/checkout', nextUrl))
+    return NextResponse.next()
   }
 
   // No session -> login

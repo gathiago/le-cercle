@@ -10,17 +10,18 @@ import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Loader2, ArrowLeft, CreditCard, Shield, CheckCircle } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
+import { ArrowLeft, CreditCard, ShieldCheck, CheckCircle } from '@phosphor-icons/react'
 
 const schema = z.object({
-  name: z.string().min(3, 'Mínimo 3 caracteres'),
-  email: z.string().email('E-mail inválido'),
-  password: z.string().min(6, 'Mínimo 6 caracteres'),
+  name: z.string().min(3, 'Minimo 3 caracteres'),
+  email: z.string().email('E-mail invalido'),
+  password: z.string().min(6, 'Minimo 6 caracteres'),
   confirmPassword: z.string(),
   phone: z.string().optional(),
-  acceptedTerms: z.literal(true, { message: 'Você precisa aceitar os termos' }),
+  acceptedTerms: z.literal(true, { message: 'Voce precisa aceitar os termos' }),
 }).refine(data => data.password === data.confirmPassword, {
-  message: 'As senhas não coincidem',
+  message: 'As senhas nao coincidem',
   path: ['confirmPassword'],
 })
 
@@ -51,124 +52,79 @@ function CadastroContent() {
     defaultValues: { acceptedTerms: false as any },
   })
 
-  if (!plan) {
-    router.push('/checkout')
-    return null
-  }
+  if (!plan) { router.push('/checkout'); return null }
 
-  const planLabels: Record<string, string> = {
-    monthly: 'Mensal', quarterly: 'Trimestral', yearly: 'Anual', premium: 'Premium',
-  }
+  const planLabels: Record<string, string> = { monthly: 'Mensal', quarterly: 'Trimestral', yearly: 'Anual', premium: 'Premium' }
 
-  function onSubmit(data: FormData) {
-    setFormData(data)
-    setPaying(true)
-  }
+  function onSubmit(data: FormData) { setFormData(data); setPaying(true) }
 
   async function handleSimulatePayment() {
     if (!formData) return
-    setLoading(true)
-    setError('')
-
+    setLoading(true); setError('')
     try {
       const res = await fetch('/api/checkout/simulate-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          phone: formData.phone || null,
-          plan: planId,
-          couponCode: couponCode || null,
-        }),
+        body: JSON.stringify({ name: formData.name, email: formData.email, password: formData.password, phone: formData.phone || null, plan: planId, couponCode: couponCode || null }),
       })
-
       const data = await res.json()
-      if (!res.ok) {
-        setError(data.error || 'Erro ao processar pagamento')
-        setLoading(false)
-        return
-      }
-
-      // Auto-login after payment
-      await signIn('credentials', {
-        email: formData.email,
-        password: formData.password,
-        redirect: false,
-      })
-
+      if (!res.ok) { setError(data.error || 'Erro ao processar'); setLoading(false); return }
+      await signIn('credentials', { email: formData.email, password: formData.password, redirect: false })
       router.push('/checkout/sucesso')
-    } catch {
-      setError('Erro inesperado. Tente novamente.')
-      setLoading(false)
-    }
+    } catch { setError('Erro inesperado.'); setLoading(false) }
   }
 
-  // Payment simulation screen
+  // Payment confirmation screen
   if (paying && formData) {
     return (
-      <div className="max-w-md mx-auto px-4">
-        <div className="bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
-          <div className="text-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-[var(--color-laranja-light)] flex items-center justify-center mx-auto mb-4">
-              <CreditCard className="h-8 w-8 text-[var(--color-laranja)]" />
+      <div className="max-w-md mx-auto px-4 pt-8">
+        <div className="bg-[var(--color-surface-lowest)] rounded-[2rem] p-8 shadow-[0_16px_48px_-12px_rgba(48,51,66,0.06)]">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-400 flex items-center justify-center mx-auto mb-5 shadow-[0_8px_24px_-4px_rgba(16,185,129,0.3)]">
+              <CreditCard className="h-7 w-7 text-white" weight="bold" />
             </div>
-            <h2 className="text-xl font-bold text-[var(--color-azul-escuro)]">Confirmar Pagamento</h2>
-            <p className="text-sm text-muted-foreground mt-1">Revise os dados e confirme</p>
+            <h2 className="text-xl font-bold text-[var(--color-azul-escuro)] tracking-tight">Confirmar Pagamento</h2>
+            <p className="text-sm text-[var(--color-azul-escuro)]/35 mt-1">Revise e confirme</p>
           </div>
 
-          <div className="bg-[var(--color-surface-low)] rounded-xl p-4 mb-4 space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Plano</span>
-              <span className="font-semibold text-[var(--color-azul-escuro)]">{planLabels[planId]}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Valor</span>
-              <span className="font-bold text-[var(--color-azul-escuro)]">R$ {plan.price.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Nome</span>
-              <span className="text-[var(--color-azul-escuro)]">{formData.name}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">E-mail</span>
-              <span className="text-[var(--color-azul-escuro)]">{formData.email}</span>
-            </div>
+          <div className="bg-[var(--color-surface-low)] rounded-xl p-5 mb-5 space-y-3">
+            {[
+              ['Plano', planLabels[planId]],
+              ['Valor', `R$ ${plan.price.toFixed(2)}`],
+              ['Nome', formData.name],
+              ['E-mail', formData.email],
+            ].map(([k, v]) => (
+              <div key={k} className="flex justify-between text-sm">
+                <span className="text-[var(--color-azul-escuro)]/35">{k}</span>
+                <span className="font-medium text-[var(--color-azul-escuro)]">{v}</span>
+              </div>
+            ))}
           </div>
 
           {error && <div className="bg-red-50 text-red-600 px-4 py-3 rounded-xl text-sm mb-4">{error}</div>}
 
-          <div className="space-y-3">
-            {/* Simulated payment methods */}
-            <div className="border border-green-200 bg-green-50 rounded-xl p-3 flex items-center gap-3">
-              <CheckCircle className="h-5 w-5 text-green-500" />
-              <div>
-                <p className="text-sm font-medium text-green-800">PIX - Aprovação Instantânea</p>
-                <p className="text-xs text-green-600">Pagamento simulado para demonstração</p>
-              </div>
+          <div className="bg-emerald-50 rounded-xl p-4 flex items-center gap-3 mb-5">
+            <CheckCircle className="h-5 w-5 text-emerald-500 shrink-0" weight="fill" />
+            <div>
+              <p className="text-sm font-medium text-emerald-800">PIX - Aprovacao Instantanea</p>
+              <p className="text-xs text-emerald-600">Pagamento simulado para demonstracao</p>
             </div>
-
-            <Button
-              onClick={handleSimulatePayment}
-              disabled={loading}
-              className="w-full h-14 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:opacity-90 text-white font-semibold text-lg shadow-[0_8px_32px_rgba(34,197,94,0.3)]"
-            >
-              {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : (
-                <>
-                  <CheckCircle className="h-5 w-5 mr-2" />
-                  Confirmar Pagamento
-                </>
-              )}
-            </Button>
-
-            <button
-              onClick={() => setPaying(false)}
-              className="w-full text-center text-sm text-muted-foreground hover:text-[var(--color-azul-escuro)]"
-            >
-              Voltar
-            </button>
           </div>
+
+          <Button
+            onClick={handleSimulatePayment}
+            disabled={loading}
+            className="w-full h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-semibold text-base shadow-[0_8px_24px_rgba(16,185,129,0.25)] active:scale-[0.98]"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.15)' }}
+          >
+            {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : (
+              <><CheckCircle className="h-5 w-5 mr-2" weight="bold" /> Confirmar Pagamento</>
+            )}
+          </Button>
+
+          <button onClick={() => setPaying(false)} className="w-full text-center text-sm text-[var(--color-azul-escuro)]/30 hover:text-[var(--color-azul-escuro)]/60 mt-4 transition-colors">
+            Voltar
+          </button>
         </div>
       </div>
     )
@@ -176,99 +132,84 @@ function CadastroContent() {
 
   // Registration form
   return (
-    <div className="max-w-md mx-auto px-4">
-      <button onClick={() => router.back()} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-[var(--color-azul-escuro)] mb-6">
-        <ArrowLeft className="h-4 w-4" /> Voltar aos planos
+    <div className="max-w-md mx-auto px-4 pt-4">
+      <button onClick={() => router.back()} className="flex items-center gap-1.5 text-sm text-[var(--color-azul-escuro)]/35 hover:text-[var(--color-azul-escuro)] mb-8 transition-colors">
+        <ArrowLeft className="h-4 w-4" weight="bold" /> Voltar aos planos
       </button>
 
-      <div className="bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
-        <div className="bg-[var(--color-surface-low)] rounded-xl p-4 mb-6">
+      <div className="bg-[var(--color-surface-lowest)] rounded-[2rem] p-8 shadow-[0_16px_48px_-12px_rgba(48,51,66,0.06)]">
+        {/* Plan summary — tonal shift */}
+        <div className="bg-[var(--color-surface-low)] rounded-xl p-5 mb-7">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-sm font-semibold text-[var(--color-azul-escuro)]">Plano {planLabels[planId]}</p>
-              {couponCode && <p className="text-xs text-green-600 mt-0.5">Cupom: {couponCode}</p>}
+              <p className="text-sm font-bold text-[var(--color-azul-escuro)]">Plano {planLabels[planId]}</p>
+              {couponCode && <p className="text-xs text-emerald-600 mt-0.5 font-medium">Cupom: {couponCode}</p>}
             </div>
             <div className="text-right">
               <p className="text-lg font-bold text-[var(--color-azul-escuro)]">R$ {plan.price.toFixed(2)}</p>
-              {plan.intervalCount > 1 && (
-                <p className="text-xs text-muted-foreground">R$ {plan.priceMonthly.toFixed(2)}/mês</p>
-              )}
+              {plan.intervalCount > 1 && <p className="text-xs text-[var(--color-azul-escuro)]/30">R$ {plan.priceMonthly.toFixed(2)}/mes</p>}
             </div>
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold text-[var(--color-azul-escuro)] mb-1">Crie sua conta</h2>
-        <p className="text-sm text-muted-foreground mb-6">Preencha seus dados para continuar.</p>
+        <h2 className="text-xl font-bold text-[var(--color-azul-escuro)] tracking-tight mb-1">Crie sua conta</h2>
+        <p className="text-sm text-[var(--color-azul-escuro)]/35 mb-7">Preencha seus dados para continuar.</p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {error && <div className="bg-red-50 text-red-600 px-4 py-3 rounded-xl text-sm">{error}</div>}
 
           <div className="space-y-2">
-            <Label>Nome completo *</Label>
-            <Input placeholder="Seu nome" className="bg-[var(--color-surface-low)] border-none h-12 rounded-xl" {...register('name')} />
+            <Label className="text-xs font-semibold text-[var(--color-azul-escuro)]/50 uppercase tracking-wider">Nome completo</Label>
+            <Input placeholder="Seu nome" className="bg-[var(--color-surface-low)] h-12 rounded-xl text-[var(--color-azul-escuro)] placeholder:text-[var(--color-azul-escuro)]/20 focus-visible:ring-[var(--color-rosa)]/30 focus-visible:bg-[var(--color-surface-lowest)]" {...register('name')} />
             {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label>E-mail *</Label>
-            <Input type="email" placeholder="seu@email.com" className="bg-[var(--color-surface-low)] border-none h-12 rounded-xl" {...register('email')} />
+            <Label className="text-xs font-semibold text-[var(--color-azul-escuro)]/50 uppercase tracking-wider">E-mail</Label>
+            <Input type="email" placeholder="seu@email.com" className="bg-[var(--color-surface-low)] h-12 rounded-xl text-[var(--color-azul-escuro)] placeholder:text-[var(--color-azul-escuro)]/20 focus-visible:ring-[var(--color-rosa)]/30 focus-visible:bg-[var(--color-surface-lowest)]" {...register('email')} />
             {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label>Senha *</Label>
-            <Input type="password" placeholder="Mínimo 6 caracteres" className="bg-[var(--color-surface-low)] border-none h-12 rounded-xl" {...register('password')} />
+            <Label className="text-xs font-semibold text-[var(--color-azul-escuro)]/50 uppercase tracking-wider">Senha</Label>
+            <Input type="password" placeholder="Minimo 6 caracteres" className="bg-[var(--color-surface-low)] h-12 rounded-xl text-[var(--color-azul-escuro)] placeholder:text-[var(--color-azul-escuro)]/20 focus-visible:ring-[var(--color-rosa)]/30 focus-visible:bg-[var(--color-surface-lowest)]" {...register('password')} />
             {errors.password && <p className="text-xs text-red-500">{errors.password.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label>Confirmar senha *</Label>
-            <Input type="password" placeholder="Repita a senha" className="bg-[var(--color-surface-low)] border-none h-12 rounded-xl" {...register('confirmPassword')} />
+            <Label className="text-xs font-semibold text-[var(--color-azul-escuro)]/50 uppercase tracking-wider">Confirmar senha</Label>
+            <Input type="password" placeholder="Repita a senha" className="bg-[var(--color-surface-low)] h-12 rounded-xl text-[var(--color-azul-escuro)] placeholder:text-[var(--color-azul-escuro)]/20 focus-visible:ring-[var(--color-rosa)]/30 focus-visible:bg-[var(--color-surface-lowest)]" {...register('confirmPassword')} />
             {errors.confirmPassword && <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label>Telefone / WhatsApp <span className="text-muted-foreground">(opcional)</span></Label>
+            <Label className="text-xs font-semibold text-[var(--color-azul-escuro)]/50 uppercase tracking-wider">Telefone / WhatsApp <span className="text-[var(--color-azul-escuro)]/20">(opcional)</span></Label>
             <Input
-              type="tel"
-              placeholder="(11) 99999-9999"
-              value={phone}
-              onChange={(e) => {
-                const formatted = formatPhone(e.target.value)
-                setPhone(formatted)
-                setValue('phone', formatted)
-              }}
-              className="bg-[var(--color-surface-low)] border-none h-12 rounded-xl"
+              type="tel" placeholder="(11) 99999-9999" value={phone}
+              onChange={(e) => { const f = formatPhone(e.target.value); setPhone(f); setValue('phone', f) }}
+              className="bg-[var(--color-surface-low)] h-12 rounded-xl text-[var(--color-azul-escuro)] placeholder:text-[var(--color-azul-escuro)]/20 focus-visible:ring-[var(--color-rosa)]/30 focus-visible:bg-[var(--color-surface-lowest)]"
             />
           </div>
 
-          <div className="flex items-start gap-3 pt-2">
-            <input
-              type="checkbox"
-              id="terms"
-              className="mt-1 h-4 w-4 rounded border-gray-300 text-[var(--color-laranja)] focus:ring-[var(--color-laranja)]"
-              {...register('acceptedTerms')}
-            />
-            <label htmlFor="terms" className="text-sm text-muted-foreground leading-tight">
-              Li e aceito os{' '}
-              <a href="/termos" target="_blank" className="text-[var(--color-laranja)] underline">Termos de Uso</a>
-              {' '}e{' '}
-              <a href="/privacidade" target="_blank" className="text-[var(--color-laranja)] underline">Política de Privacidade</a>
+          <div className="flex items-start gap-3 pt-1">
+            <input type="checkbox" id="terms" className="mt-1 h-4 w-4 rounded accent-[var(--color-rosa)]" {...register('acceptedTerms')} />
+            <label htmlFor="terms" className="text-sm text-[var(--color-azul-escuro)]/40 leading-tight">
+              Li e aceito os <a href="/termos" target="_blank" className="text-[var(--color-laranja)] font-medium underline">Termos de Uso</a> e <a href="/privacidade" target="_blank" className="text-[var(--color-laranja)] font-medium underline">Politica de Privacidade</a>
             </label>
           </div>
           {errors.acceptedTerms && <p className="text-xs text-red-500">{errors.acceptedTerms.message}</p>}
 
           <Button
             type="submit"
-            className="w-full h-14 rounded-2xl bg-gradient-to-r from-[var(--color-laranja)] to-[#ff9062] hover:opacity-90 text-white font-semibold text-lg shadow-[0_8px_32px_rgba(252,142,96,0.3)] mt-2"
+            className="w-full h-14 rounded-xl bg-gradient-to-br from-[var(--color-secondary)] to-[var(--color-laranja)] text-white font-semibold text-base shadow-[0_12px_32px_rgba(252,142,96,0.25)] active:scale-[0.98] mt-2"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}
           >
-            <CreditCard className="h-4 w-4 mr-2" />
+            <CreditCard className="h-4 w-4 mr-2" weight="bold" />
             Ir para pagamento
           </Button>
 
-          <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-1">
-            <Shield className="h-3 w-3" />
-            Pagamento seguro
+          <div className="flex items-center justify-center gap-2 text-xs text-[var(--color-azul-escuro)]/20 pt-1">
+            <ShieldCheck className="h-3.5 w-3.5" weight="bold" /> Pagamento seguro
           </div>
         </form>
       </div>
@@ -278,11 +219,7 @@ function CadastroContent() {
 
 export default function CadastroPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[var(--color-surface)] flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-[var(--color-laranja)]" />
-      </div>
-    }>
+    <Suspense fallback={<div className="min-h-[100dvh] bg-[var(--color-surface)] flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-[var(--color-laranja)]" /></div>}>
       <CadastroContent />
     </Suspense>
   )

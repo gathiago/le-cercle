@@ -6,27 +6,22 @@ import { PlatformHeader } from '@/components/layout/platform-header'
 
 export default async function PlatformLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
-
-  if (!session?.user) {
-    redirect('/login')
-  }
+  if (!session?.user) redirect('/login')
 
   return (
-    <div className="min-h-screen bg-[var(--color-surface)]">
-      {/* Desktop Sidebar */}
-      <aside className="fixed left-0 top-0 bottom-0 w-[220px] hidden lg:flex flex-col bg-[var(--color-azul-escuro)] z-40">
+    <div className="min-h-[100dvh] bg-[var(--color-surface)]">
+      {/* Desktop Sidebar — azul escuro, no borders */}
+      <aside className="fixed left-0 top-0 bottom-0 w-[240px] hidden lg:flex flex-col bg-[#303342] dark:bg-[#111115] z-40">
         <PlatformSidebar user={session.user} />
       </aside>
 
-      {/* Main Content */}
-      <div className="lg:ml-[220px] min-h-screen flex flex-col">
+      <div className="lg:ml-[240px] min-h-[100dvh] flex flex-col">
         <PlatformHeader user={session.user} />
-        <main className="flex-1 px-4 md:px-8 py-6 pb-24 lg:pb-6">
+        <main className="flex-1 px-5 md:px-8 py-6 pb-28 lg:pb-8">
           {children}
         </main>
       </div>
 
-      {/* Mobile Bottom Nav */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40">
         <PlatformMobileNav />
       </div>

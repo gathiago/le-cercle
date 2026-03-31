@@ -5,6 +5,18 @@ import bcrypt from 'bcryptjs'
 const prisma = new PrismaClient()
 
 async function main() {
+  // Clean old data
+  await prisma.reaction.deleteMany()
+  await prisma.comment.deleteMany()
+  await prisma.post.deleteMany()
+  await prisma.meeting.deleteMany()
+  await prisma.weekContent.deleteMany()
+  await prisma.premiumEvent.deleteMany()
+  await prisma.coupon.deleteMany()
+  await prisma.pendingUser.deleteMany()
+  await prisma.passwordResetToken.deleteMany()
+  await prisma.user.deleteMany()
+
   // ===== ADMIN: Mardia (gestora) =====
   const adminPassword = await bcrypt.hash('admin123', 12)
 
@@ -13,7 +25,7 @@ async function main() {
     update: {},
     create: {
       email: 'mardia@lecercle.com',
-      name: 'Mardia Silva',
+      name: 'Mardia Alcantara',
       passwordHash: adminPassword,
       role: 'ADMIN',
       level: 'AVANCADO',
@@ -53,7 +65,7 @@ async function main() {
     update: {},
     create: {
       email: 'isa@lecercle.com',
-      name: 'Isabela Ferreira',
+      name: 'Isadora Bevilaqua',
       passwordHash: isaPassword,
       role: 'MEMBER',
       level: 'INICIANTE',
@@ -367,7 +379,7 @@ async function main() {
   console.log('  Senha: mardia123')
   console.log('')
   console.log('MEMBROS:')
-  console.log('  Isa:    isa@lecercle.com / isa12345')
+  console.log('  Isadora: isa@lecercle.com / isa12345')
   console.log('  Thiago: thiago@lecercle.com / thiago123')
   console.log('')
   console.log('CUPOM: BONJOUR20 (20% off)')

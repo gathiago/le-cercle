@@ -1,40 +1,21 @@
-import { createClient } from '@supabase/supabase-js'
+import { writeFile, mkdir } from 'fs/promises'
+import { join } from 'path'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+async function saveLocal(file: Buffer, folder: string, fileName: string): Promise<string> {
+  const dir = join(process.cwd(), 'public', 'uploads', folder)
+  await mkdir(dir, { recursive: true })
 
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+  const safeName = fileName.replace(/[^a-zA-Z0-9._-]/g, '_')
+  const filePath = join(dir, safeName)
+  await writeFile(filePath, file)
+
+  return `/uploads/${folder}/${safeName}`
+}
 
 export async function uploadAudio(file: Buffer, fileName: string): Promise<string> {
-  const { data, error } = await supabaseAdmin.storage
-    .from('audios')
-    .upload(fileName, file, {
-      contentType: 'audio/webm',
-      upsert: false,
-    })
-
-  if (error) throw error
-
-  const { data: urlData } = supabaseAdmin.storage
-    .from('audios')
-    .getPublicUrl(data.path)
-
-  return urlData.publicUrl
+  return saveLocal(file, 'audios', fileName)
 }
 
 export async function uploadImage(file: Buffer, fileName: string): Promise<string> {
-  const { data, error } = await supabaseAdmin.storage
-    .from('images')
-    .upload(fileName, file, {
-      contentType: 'image/webp',
-      upsert: false,
-    })
-
-  if (error) throw error
-
-  const { data: urlData } = supabaseAdmin.storage
-    .from('images')
-    .getPublicUrl(data.path)
-
-  return urlData.publicUrl
+  return saveLocal(file, 'images', fileName)
 }

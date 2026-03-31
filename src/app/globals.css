@@ -62,7 +62,7 @@
 
 /* ============================================================
    Le Cercle — Modern Salon Design System
-   Light-mode only. No borders by default. Soft, warm palette.
+   Tonal layering. No borders. Warm palette. Light + Dark modes.
    ============================================================ */
 
 :root {
@@ -125,6 +125,61 @@
   --color-surface: #f9f9f9;
   --color-surface-low: #f3f3f3;
   --color-surface-lowest: #ffffff;
+}
+
+/* ===== DARK MODE ===== */
+.dark {
+  --background: #141418;
+  --foreground: #e4e4e7;
+
+  --card: #1c1c22;
+  --card-foreground: #e4e4e7;
+
+  --popover: #1c1c22;
+  --popover-foreground: #e4e4e7;
+
+  --primary: #FF9FAF;
+  --primary-foreground: #1c1c22;
+
+  --secondary: #FC8E60;
+  --secondary-foreground: #1c1c22;
+
+  --muted: #25252d;
+  --muted-foreground: #71717a;
+
+  --accent: #2a1f22;
+  --accent-foreground: #e4e4e7;
+
+  --border: transparent;
+  --input: #25252d;
+  --ring: #FF9FAF;
+
+  --chart-1: #FF9FAF;
+  --chart-2: #FC8E60;
+  --chart-3: #c97080;
+  --chart-4: #e08a5a;
+  --chart-5: #71717a;
+
+  --sidebar: #111115;
+  --sidebar-foreground: #e4e4e7;
+  --sidebar-primary: #FF9FAF;
+  --sidebar-primary-foreground: #1c1c22;
+  --sidebar-accent: #25252d;
+  --sidebar-accent-foreground: #e4e4e7;
+  --sidebar-border: transparent;
+  --sidebar-ring: #FF9FAF;
+
+  --color-rosa: #FF9FAF;
+  --color-laranja: #FC8E60;
+  --color-azul-escuro: #e4e4e7;
+  --color-cinza-claro: #25252d;
+  --color-rosa-hover: #FF8A9D;
+  --color-laranja-hover: #E87A4D;
+  --color-rosa-light: #2a1f22;
+  --color-laranja-light: #2a2118;
+  --color-surface: #141418;
+  --color-surface-low: #1c1c22;
+  --color-surface-lowest: #25252d;
 }
 
 @layer base {
