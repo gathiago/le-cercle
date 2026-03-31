@@ -135,7 +135,7 @@ export default function CursoGratuitoPlayerPage() {
                 {/* Material download */}
                 {activeLesson?.materialUrl && (
                   <a
-                    href={activeLesson.materialUrl}
+                    href={activeLesson.materialUrl.startsWith('/uploads/') ? `/api${activeLesson.materialUrl}` : activeLesson.materialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-4 inline-flex items-center gap-2 bg-[var(--color-rosa)]/10 text-[var(--color-rosa)] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[var(--color-rosa)]/20 transition-colors"
