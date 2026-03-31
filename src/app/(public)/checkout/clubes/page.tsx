@@ -102,7 +102,7 @@ function ClubesContent() {
               />
             ))}
             <span className="text-xs text-[var(--color-azul-escuro)]/30 ml-2">
-              {selected.length}/{limit} selecionado{limit > 1 ? 's' : ''}
+              {selected.length}/{limit} selecionado{selected.length !== 1 ? 's' : ''}
             </span>
           </div>
         )}

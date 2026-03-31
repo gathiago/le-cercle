@@ -6,10 +6,10 @@ import { usePathname } from 'next/navigation'
 import { House, BookOpen, VideoCamera, ChatCircleDots, DotsThree, X, PlayCircle, Books, Crown, UserCircle } from '@phosphor-icons/react'
 
 const mainNav = [
-  { href: '/dashboard', label: 'Home', icon: House },
-  { href: '/semana', label: 'Semana', icon: BookOpen },
-  { href: '/encontros', label: 'Encontros', icon: VideoCamera },
-  { href: '/comunidade', label: 'Social', icon: ChatCircleDots },
+  { href: '/dashboard', label: 'Home', icon: House, matchPaths: ['/dashboard', '/clube'] },
+  { href: '/semana', label: 'Semana', icon: BookOpen, matchPaths: ['/semana'] },
+  { href: '/encontros', label: 'Encontros', icon: VideoCamera, matchPaths: ['/encontros'] },
+  { href: '/comunidade', label: 'Social', icon: ChatCircleDots, matchPaths: ['/comunidade'] },
 ]
 
 const moreNav = [
@@ -65,7 +65,7 @@ export function PlatformMobileNav() {
       <nav className="bg-[var(--color-surface-lowest)]/80 backdrop-blur-[20px] px-2 pt-2 pb-[env(safe-area-inset-bottom,8px)] shadow-[0_-4px_24px_rgba(48,51,66,0.04)]">
         <div className="flex items-center justify-around">
           {mainNav.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+            const isActive = item.matchPaths.some(p => pathname === p || pathname.startsWith(p + '/'))
             const Icon = item.icon
             return (
               <Link

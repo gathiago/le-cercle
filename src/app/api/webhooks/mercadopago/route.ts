@@ -99,11 +99,10 @@ export async function POST(request: Request) {
               where: { slug: { in: clubSlugs } },
               select: { id: true },
             })
-            for (const club of clubRecords) {
-              await prisma.clubMember.create({
-                data: { userId: newUser.id, clubId: club.id },
-              })
-            }
+            await prisma.clubMember.createMany({
+              data: clubRecords.map(c => ({ userId: newUser.id, clubId: c.id })),
+              skipDuplicates: true,
+            })
           }
         }
 

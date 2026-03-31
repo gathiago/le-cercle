@@ -107,8 +107,8 @@ function CadastroContent() {
           <div className="bg-emerald-50 rounded-xl p-4 flex items-center gap-3 mb-5">
             <CheckCircle className="h-5 w-5 text-emerald-500 shrink-0" weight="fill" />
             <div>
-              <p className="text-sm font-medium text-emerald-800">PIX - Aprovacao Instantanea</p>
-              <p className="text-xs text-emerald-600">Pagamento simulado para demonstracao</p>
+              <p className="text-sm font-medium text-emerald-800">PIX - Aprovação Instantânea</p>
+              <p className="text-xs text-emerald-600">Pagamento simulado para demonstração</p>
             </div>
           </div>
 
@@ -148,7 +148,7 @@ function CadastroContent() {
             </div>
             <div className="text-right">
               <p className="text-lg font-bold text-[var(--color-azul-escuro)]">R$ {plan.price.toFixed(2)}</p>
-              {plan.intervalCount > 1 && <p className="text-xs text-[var(--color-azul-escuro)]/30">R$ {plan.priceMonthly.toFixed(2)}/mes</p>}
+              {plan.intervalCount > 1 && <p className="text-xs text-[var(--color-azul-escuro)]/30">R$ {plan.priceMonthly.toFixed(2)}/mês</p>}
             </div>
           </div>
         </div>
@@ -195,7 +195,7 @@ function CadastroContent() {
           <div className="flex items-start gap-3 pt-1">
             <input type="checkbox" id="terms" className="mt-1 h-4 w-4 rounded accent-[var(--color-rosa)]" {...register('acceptedTerms')} />
             <label htmlFor="terms" className="text-sm text-[var(--color-azul-escuro)]/40 leading-tight">
-              Li e aceito os <a href="/termos" target="_blank" className="text-[var(--color-laranja)] font-medium underline">Termos de Uso</a> e <a href="/privacidade" target="_blank" className="text-[var(--color-laranja)] font-medium underline">Politica de Privacidade</a>
+              Li e aceito os <a href="/termos" target="_blank" className="text-[var(--color-laranja)] font-medium underline">Termos de Uso</a> e <a href="/privacidade" target="_blank" className="text-[var(--color-laranja)] font-medium underline">Política de Privacidade</a>
             </label>
           </div>
           {errors.acceptedTerms && <p className="text-xs text-red-500">{errors.acceptedTerms.message}</p>}

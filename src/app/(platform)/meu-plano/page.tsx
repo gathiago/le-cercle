@@ -10,9 +10,9 @@ import Link from 'next/link'
 const spring = { type: 'spring' as const, stiffness: 120, damping: 18 }
 
 const allClubs = [
-  { slug: 'premiers-pas-club', nameFr: 'Premiers Pas Club', namePt: 'Clube Iniciantes' },
-  { slug: 'club-intermediaire', nameFr: 'Club Intermédiaire', namePt: 'Clube Intermediários' },
-  { slug: 'fluent-club', nameFr: 'Fluent Club', namePt: 'Clube Avançados' },
+  { slug: 'premiers-pas-club', nameFr: 'Premiers Pas Club', namePt: 'Clube de Iniciantes' },
+  { slug: 'club-intermediaire', nameFr: 'Club Intermédiaire', namePt: 'Clube de Intermediários' },
+  { slug: 'fluent-club', nameFr: 'Fluent Club', namePt: 'Clube de Avançados' },
   { slug: 'nuit-club', nameFr: 'Nuit Club', namePt: 'Clube de Música' },
   { slug: 'noir-lecture-club', nameFr: 'Noir Lecture Club', namePt: 'Clube de Leitura' },
   { slug: 'cine-noir-club', nameFr: 'Ciné Noir Club', namePt: 'Clube de Cinema' },

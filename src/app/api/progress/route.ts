@@ -14,6 +14,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'lessonId obrigatório' }, { status: 400 })
   }
 
+  // Verify the lesson exists and the user is a member of the club
+  const lesson = await prisma.lesson.findUnique({
+    where: { id: lessonId },
+    include: {
+      course: {
+        include: {
+          club: {
+            include: {
+              members: { where: { userId: session.user.id }, select: { id: true } },
+            },
+          },
+        },
+      },
+    },
+  })
+
+  if (!lesson || !lesson.course?.club?.members?.length) {
+    return NextResponse.json({ error: 'Acesso negado' }, { status: 403 })
+  }
+
   await prisma.userProgress.upsert({
     where: {
       userId_lessonId: { userId: session.user.id, lessonId },

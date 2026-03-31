@@ -4,6 +4,7 @@ import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, FileDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { LessonCompleteButton } from '@/components/clube/lesson-complete-button'
+import DOMPurify from 'isomorphic-dompurify'
 
 export default async function LessonPage({
   params,
@@ -12,6 +13,14 @@ export default async function LessonPage({
 }) {
   const session = await auth()
   if (!session?.user) redirect('/login')
+
+  const currentUser = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { subscriptionStatus: true },
+  })
+  if (!currentUser || currentUser.subscriptionStatus !== 'ACTIVE') {
+    redirect('/checkout')
+  }
 
   const { slug, courseSlug, lessonSlug } = await params
 
@@ -76,6 +85,7 @@ export default async function LessonPage({
         <div className="bg-[var(--color-azul-escuro)] rounded-2xl overflow-hidden mb-6 aspect-video relative">
           <iframe
             src={lesson.videoUrl}
+            title={lesson.title}
             className="w-full h-full absolute inset-0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -88,7 +98,7 @@ export default async function LessonPage({
         <div className="bg-[var(--color-surface-lowest)] rounded-2xl p-6 mb-6 shadow-[0_4px_24px_rgba(48,51,66,0.04)]">
           <div
             className="prose prose-sm max-w-none text-[var(--color-azul-escuro)]"
-            dangerouslySetInnerHTML={{ __html: lesson.content }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(lesson.content) }}
           />
         </div>
       )}

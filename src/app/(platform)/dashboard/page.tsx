@@ -7,12 +7,12 @@ import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 
 const clubSubtitles: Record<string, string> = {
-  'Premiers Pas Club': 'Clube iniciantes',
-  'Club Intermédiaire': 'Clube intermediários',
-  'Fluent Club': 'Clube avançados',
-  'Nuit Club': 'Clube de música',
-  'Noir Lecture Club': 'Clube de leitura',
-  'Ciné Noir Club': 'Clube de cinema',
+  'Premiers Pas Club': 'Clube de Iniciantes',
+  'Club Intermédiaire': 'Clube de Intermediários',
+  'Fluent Club': 'Clube de Avançados',
+  'Nuit Club': 'Clube de Música',
+  'Noir Lecture Club': 'Clube de Leitura',
+  'Ciné Noir Club': 'Clube de Cinema',
 }
 
 export default async function DashboardPage() {
@@ -72,10 +72,11 @@ export default async function DashboardPage() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-bold text-[var(--color-azul-escuro)]">Meus Clubes</h3>
           <Link href="/meu-plano" className="text-sm text-[var(--color-laranja)] font-medium hover:text-[var(--color-laranja-hover)]">
-            {hasClubs ? 'Gerenciar' : 'Escolher clubes'}
+            {hasClubs ? 'Ver plano' : 'Escolher clubes'}
           </Link>
         </div>
 
+        <div className="relative">
         <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-hide" style={{ scrollSnapType: 'x mandatory' }}>
           {sortedClubs.map((club) => {
             const isMember = userClubIds.has(club.id)
@@ -99,7 +100,7 @@ export default async function DashboardPage() {
                     </div>
                   </Link>
                 ) : (
-                  <Link href="/meu-plano" className="block group">
+                  <Link href="/checkout" className="block group">
                     <div className="relative w-[220px] h-[300px] rounded-[1.5rem] overflow-hidden shadow-[0_4px_16px_rgba(48,51,66,0.06)]">
                       {club.imageUrl ? (
                         <img src={club.imageUrl.startsWith('/uploads/') ? `/api${club.imageUrl}` : club.imageUrl} alt={club.name} className="absolute inset-0 w-full h-full object-cover grayscale opacity-40" />
@@ -122,6 +123,8 @@ export default async function DashboardPage() {
               </div>
             )
           })}
+        </div>
+        <div className="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-[var(--color-surface)] to-transparent pointer-events-none lg:hidden" />
         </div>
       </div>
 

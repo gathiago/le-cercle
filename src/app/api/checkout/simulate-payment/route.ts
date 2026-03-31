@@ -4,6 +4,11 @@ import { prisma } from '@/lib/prisma'
 import { getPlanById, type PlanId } from '@/lib/plans'
 
 export async function POST(request: Request) {
+  // Block in production - this is for demo/testing only
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Não disponível' }, { status: 404 })
+  }
+
   try {
     const { name, email, password, phone, plan, couponCode, clubs } = await request.json()
 
@@ -91,11 +96,10 @@ export async function POST(request: Request) {
           where: { slug: { in: clubSlugs } },
           select: { id: true },
         })
-        for (const club of clubRecords) {
-          await prisma.clubMember.create({
-            data: { userId: user.id, clubId: club.id },
-          })
-        }
+        await prisma.clubMember.createMany({
+          data: clubRecords.map(c => ({ userId: user.id, clubId: c.id })),
+          skipDuplicates: true,
+        })
       }
     }
 
