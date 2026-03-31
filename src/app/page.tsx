@@ -31,8 +31,9 @@ export default function LandingPage() {
       <LandingHero />
 
       {/* ===== PROBLEMA — Tonal shift to azul-escuro ===== */}
-      <section className="py-28 px-6 bg-[var(--color-azul-escuro)]">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-20 items-center">
+      <section className="py-28 px-6 bg-[var(--color-azul-escuro)] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Formas.png)', backgroundSize: '400px', backgroundRepeat: 'repeat' }} />
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-20 items-center relative">
           <div>
             <p className="text-[var(--color-rosa)] text-xs font-semibold tracking-[3px] uppercase mb-6">O problema</p>
             <h2 className="text-3xl md:text-[2.75rem] font-bold text-white tracking-tight leading-[1.1] mb-6">
@@ -67,12 +68,13 @@ export default function LandingPage() {
       <LandingFeatures />
 
       {/* ===== SOBRE A MARDIA — surface shift to rosa-light ===== */}
-      <section className="py-28 px-6 bg-[var(--color-rosa-light)]/40">
+      <section className="py-28 px-6 bg-[var(--color-rosa-light)]/40 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '220px', backgroundRepeat: 'repeat' }} />
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[320px_1fr] gap-20 items-center">
           <div className="flex justify-center md:justify-start">
             <div className="relative">
-              <div className="w-60 h-60 md:w-72 md:h-72 rounded-[2rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)] flex items-center justify-center text-white text-7xl md:text-8xl font-bold shadow-[0_32px_64px_-16px_rgba(147,70,85,0.35)]">
-                M
+              <div className="w-60 h-60 md:w-72 md:h-72 rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(147,70,85,0.35)]">
+                <img src="/mardia-1.png" alt="Mardia Alcantara" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-[var(--color-surface-lowest)] rounded-2xl px-5 py-3 shadow-[0_8px_24px_rgba(48,51,66,0.06)]">
                 <p className="text-[10px] text-[var(--color-azul-escuro)]/40 uppercase tracking-[2px] font-semibold">Mentora</p>

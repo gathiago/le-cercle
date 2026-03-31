@@ -63,11 +63,12 @@ export function AdminCoursesManager({
     description: '',
     level: 'INICIANTE',
     clubId: '',
+    isFree: false,
     isPublished: false,
   })
 
   function resetForm() {
-    setForm({ title: '', slug: '', description: '', level: 'INICIANTE', clubId: '', isPublished: false })
+    setForm({ title: '', slug: '', description: '', level: 'INICIANTE', clubId: '', isFree: false, isPublished: false })
     setEditingId(null)
   }
 
@@ -78,6 +79,7 @@ export function AdminCoursesManager({
       description: course.description,
       level: course.level,
       clubId: course.clubId || '',
+      isFree: (course as any).isFree || false,
       isPublished: course.isPublished,
     })
     setEditingId(course.id)
@@ -179,6 +181,13 @@ export function AdminCoursesManager({
                     </SelectContent>
                   </Select>
                 </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <Label>Gratuito</Label>
+                <Switch
+                  checked={form.isFree}
+                  onCheckedChange={(v) => setForm((f) => ({ ...f, isFree: v }))}
+                />
               </div>
               <div className="flex items-center justify-between">
                 <Label>Publicado</Label>

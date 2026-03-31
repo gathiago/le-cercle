@@ -10,7 +10,7 @@ const navItems = [
   { href: '/biblioteca', label: 'Biblioteca', icon: Books },
   { href: '/encontros', label: 'Encontros', icon: VideoCamera },
   { href: '/comunidade', label: 'Comunidade', icon: ChatCircleDots },
-  { href: '/curso-gratuito', label: 'Curso Grátis', icon: PlayCircle },
+  { href: '/conteudo-gratuito', label: 'Grátis', icon: PlayCircle },
   { href: '/premium', label: 'Premium', icon: Crown },
   { href: '/perfil', label: 'Perfil', icon: UserCircle },
 ]

@@ -432,59 +432,38 @@ async function main() {
       description: 'Seu ponto de partida para falar francês. Aprenda a se apresentar, cumprimentar e ter conversas básicas.',
       level: 'INICIANTE',
       clubId: clubBasico.id,
+      isFree: true,
       isPublished: true,
       sortOrder: 1,
     },
   })
 
-  // Aulas do curso
-  await prisma.lesson.upsert({
-    where: { courseId_slug: { courseId: curso1.id, slug: 'se-apresentar' } },
-    update: {},
-    create: {
-      slug: 'se-apresentar',
-      title: 'Como se apresentar em francês',
-      description: 'Aprenda a dizer seu nome, de onde você é e o que faz.',
-      videoUrl: 'https://www.youtube.com/embed/LB2Y6fKq5uo',
-      content: 'Nesta aula você vai aprender as expressões fundamentais para se apresentar em francês: Je m\'appelle..., J\'habite à..., Je suis...',
-      duration: 15,
-      courseId: curso1.id,
-      sortOrder: 1,
-      isPublished: true,
-    },
-  })
+  // Aulas do curso — Présent de l'Indicatif
+  const aulasPresent = [
+    { slug: 'apresentacao', title: 'Apresentação do Curso', videoUrl: 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view', duration: 5, sortOrder: 1 },
+    { slug: 'aula-0-introducao', title: 'Aula 0 — Introdução', videoUrl: 'https://youtu.be/b6T6-fvox8I', duration: 10, sortOrder: 2 },
+    { slug: 'aula-1-present', title: 'Aula 1 — Présent de l\'indicatif', videoUrl: 'https://youtu.be/loi51vXe3H0', duration: 15, sortOrder: 3 },
+    { slug: 'aula-2-grupo-1', title: 'Aula 2 — Verbos do 1º grupo', videoUrl: 'https://youtu.be/SN50sYAjrd4', duration: 12, sortOrder: 4 },
+    { slug: 'aula-3-grupo-2', title: 'Aula 3 — Verbos do 2º grupo', videoUrl: 'https://youtu.be/5km6rmM-3h0', duration: 14, sortOrder: 5 },
+    { slug: 'aula-4-grupo-3', title: 'Aula 4 — Verbos do 3º grupo', videoUrl: 'https://youtu.be/7Xb-B3K7cMU', duration: 16, sortOrder: 6 },
+    { slug: 'aula-5-revisao', title: 'Aula 5 — Revisão e prática', videoUrl: 'https://youtu.be/R44zqzlkK2s', duration: 13, sortOrder: 7 },
+  ]
 
-  await prisma.lesson.upsert({
-    where: { courseId_slug: { courseId: curso1.id, slug: 'cumprimentos' } },
-    update: {},
-    create: {
-      slug: 'cumprimentos',
-      title: 'Cumprimentos e saudações',
-      description: 'Bonjour, bonsoir, salut... Aprenda quando usar cada saudação.',
-      videoUrl: 'https://www.youtube.com/embed/rOjHhS5MtvA',
-      content: 'Os franceses valorizam muito as saudações. Nesta aula você aprende as formas formais e informais de cumprimentar.',
-      duration: 12,
-      courseId: curso1.id,
-      sortOrder: 2,
-      isPublished: true,
-    },
-  })
-
-  await prisma.lesson.upsert({
-    where: { courseId_slug: { courseId: curso1.id, slug: 'numeros-basicos' } },
-    update: {},
-    create: {
-      slug: 'numeros-basicos',
-      title: 'Números de 1 a 100',
-      description: 'Domine os números em francês para contar, dar seu telefone e falar de preços.',
-      videoUrl: 'https://www.youtube.com/embed/0gXvVUg2-bY',
-      content: 'Os números em francês têm algumas particularidades interessantes. A partir do 70, a lógica muda completamente!',
-      duration: 18,
-      courseId: curso1.id,
-      sortOrder: 3,
-      isPublished: true,
-    },
-  })
+  for (const aula of aulasPresent) {
+    await prisma.lesson.upsert({
+      where: { courseId_slug: { courseId: curso1.id, slug: aula.slug } },
+      update: {},
+      create: {
+        slug: aula.slug,
+        title: aula.title,
+        videoUrl: aula.videoUrl,
+        duration: aula.duration,
+        courseId: curso1.id,
+        sortOrder: aula.sortOrder,
+        isPublished: true,
+      },
+    })
+  }
 
   console.log('')
   console.log('=== SEED CONCLUÍDO ===')

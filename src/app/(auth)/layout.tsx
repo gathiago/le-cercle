@@ -3,6 +3,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-[100dvh] flex bg-[var(--color-surface)]">
       {/* Left: Decorative panel — asymmetric split */}
       <div className="hidden lg:flex w-[45%] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)] relative overflow-hidden items-end p-12">
+        {/* Estampa de fundo */}
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: 'url(/Estampa-Logo.png)', backgroundSize: '180px', backgroundRepeat: 'repeat' }} />
         {/* Ambient shapes */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/[0.06] rounded-full blur-[80px]" />
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-white/[0.04] rounded-full blur-[60px]" />

@@ -212,8 +212,8 @@ export default function ResumosVerbaisPage() {
       <section className="py-20 px-6 bg-[var(--color-rosa-light)]/40">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[300px_1fr] gap-16 items-center">
           <div className="flex justify-center md:justify-start">
-            <div className="w-60 h-60 md:w-72 md:h-72 rounded-[2rem] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)] flex items-center justify-center text-white text-7xl font-bold shadow-[0_32px_64px_-16px_rgba(147,70,85,0.35)]">
-              M
+            <div className="w-60 h-60 md:w-72 md:h-72 rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(147,70,85,0.35)]">
+              <img src="/mardia-2.png" alt="Mardia Alcantara" className="w-full h-full object-cover" />
             </div>
           </div>
           <div>
