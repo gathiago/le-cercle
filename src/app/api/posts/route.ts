@@ -21,10 +21,14 @@ export async function POST(request: Request) {
     let imageUrl: string | null = null
 
     if (audio) {
-      // Upload audio to Supabase Storage
       const { uploadAudio } = await import('@/lib/storage')
       const buffer = Buffer.from(await audio.arrayBuffer())
-      const fileName = `${session.user.id}/${Date.now()}-${audio.name}`
+      // Determine correct extension from mime type
+      const ext = audio.type.includes('mp4') ? '.mp4'
+        : audio.type.includes('ogg') ? '.ogg'
+        : audio.type.includes('wav') ? '.wav'
+        : '.webm'
+      const fileName = `${session.user.id}/${Date.now()}-recording${ext}`
       audioUrl = await uploadAudio(buffer, fileName)
     }
 

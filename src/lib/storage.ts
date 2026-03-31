@@ -1,12 +1,12 @@
 import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
+import { join, dirname } from 'path'
 
 async function saveLocal(file: Buffer, folder: string, fileName: string): Promise<string> {
-  const dir = join(process.cwd(), 'public', 'uploads', folder)
-  await mkdir(dir, { recursive: true })
+  const safeName = fileName.replace(/[^a-zA-Z0-9._\-\/]/g, '_')
+  const filePath = join(process.cwd(), 'public', 'uploads', folder, safeName)
 
-  const safeName = fileName.replace(/[^a-zA-Z0-9._-]/g, '_')
-  const filePath = join(dir, safeName)
+  // Create nested directories if fileName contains /
+  await mkdir(dirname(filePath), { recursive: true })
   await writeFile(filePath, file)
 
   return `/api/uploads/${folder}/${safeName}`
