@@ -1,10 +1,19 @@
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
-import { ArrowRight, Music, Play, BookText, Heart, MessageCircle } from 'lucide-react'
+import { ArrowRight, Music, Play, BookText, Heart, MessageCircle, Lock } from 'lucide-react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
+
+const clubSubtitles: Record<string, string> = {
+  'Premiers Pas Club': 'Clube iniciantes',
+  'Club Intermédiaire': 'Clube intermediários',
+  'Fluent Club': 'Clube avançados',
+  'Nuit Club': 'Clube de música',
+  'Noir Lecture Club': 'Clube de leitura',
+  'Ciné Noir Club': 'Clube de cinema',
+}
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -12,28 +21,18 @@ export default async function DashboardPage() {
 
   const user = session.user
 
-  const [activeWeek, userClubs, recentPosts] = await Promise.all([
+  const [activeWeek, userClubMemberships, allClubs, recentPosts] = await Promise.all([
     prisma.weekContent.findFirst({
       where: { isActive: true },
       orderBy: { weekNumber: 'desc' },
     }),
     prisma.clubMember.findMany({
       where: { userId: user.id },
-      include: {
-        club: {
-          include: {
-            courses: {
-              where: { isPublished: true },
-              include: {
-                _count: { select: { lessons: true } },
-                lessons: {
-                  select: { id: true },
-                },
-              },
-            },
-          },
-        },
-      },
+      select: { clubId: true },
+    }),
+    prisma.club.findMany({
+      where: { isActive: true },
+      orderBy: { sortOrder: 'asc' },
     }),
     prisma.post.findMany({
       take: 3,
@@ -45,36 +44,13 @@ export default async function DashboardPage() {
     }),
   ])
 
-  // Get user progress for lesson completion
-  const userProgress = await prisma.userProgress.findMany({
-    where: { userId: user.id, completed: true },
-    select: { lessonId: true },
-  })
-  const completedLessonIds = new Set(userProgress.map(p => p.lessonId))
-
-  // Club name mapping (FR → PT subtitle)
-  const clubSubtitles: Record<string, string> = {
-    'Premiers Pas Club': 'Clube Iniciantes',
-    'Club Intermédiaire': 'Clube Intermediários',
-    'Fluent Club': 'Clube Avançados',
-    'Nuit Club': 'Clube de Música',
-    'Noir Lecture Club': 'Clube de Leitura',
-    'Ciné Noir Club': 'Clube de Cinema',
-  }
-
-  const clubColors = [
-    'from-[var(--color-primary)] to-[var(--color-rosa)]',
-    'from-[var(--color-secondary)] to-[var(--color-laranja)]',
-    'from-emerald-600 to-emerald-400',
-    'from-violet-600 to-violet-400',
-    'from-amber-600 to-amber-400',
-    'from-sky-600 to-sky-400',
-  ]
+  const userClubIds = new Set(userClubMemberships.map(m => m.clubId))
+  const hasClubs = userClubIds.size > 0
 
   return (
     <div className="max-w-6xl mx-auto">
       {/* Greeting */}
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-[var(--color-azul-escuro)]">
           Bonjour, {user.name?.split(' ')[0]}!
         </h1>
@@ -83,80 +59,66 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      {/* Meus Clubes */}
-      {userClubs.length > 0 ? (
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-[var(--color-azul-escuro)]">Meus Clubes</h3>
-            <Link href="/conteudo-gratuito" className="text-sm text-[var(--color-laranja)] font-medium hover:text-[var(--color-laranja-hover)]">
-              Ver todos
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {userClubs.map((membership, i) => {
-              const club = membership.club
-              const totalLessons = club.courses.reduce((acc, c) => acc + c._count.lessons, 0)
-              const completedInClub = club.courses.reduce((acc, c) => {
-                return acc + c.lessons.filter(l => completedLessonIds.has(l.id)).length
-              }, 0)
-              const progress = totalLessons > 0 ? Math.round((completedInClub / totalLessons) * 100) : 0
-              const color = clubColors[i % clubColors.length]
-
-              return (
-                <Link
-                  key={club.id}
-                  href={`/conteudo-gratuito`}
-                  className="bg-[var(--color-surface-lowest)] rounded-[1.5rem] p-5 shadow-[0_4px_16px_rgba(48,51,66,0.04)] hover:shadow-[0_8px_24px_rgba(48,51,66,0.08)] transition-all group"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className={`w-10 h-10 rounded-xl overflow-hidden shrink-0 ${club.imageUrl ? '' : `bg-gradient-to-br ${color} flex items-center justify-center`}`}>
-                      {club.imageUrl ? (
-                        <img src={club.imageUrl} alt={club.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <span className="text-white text-sm font-bold">{club.name.charAt(0)}</span>
-                      )}
-                    </div>
-                    <div className="min-w-0">
-                      <h4 className="font-bold text-[var(--color-azul-escuro)] text-sm truncate group-hover:text-[var(--color-rosa)] transition-colors">
-                        {club.name}
-                      </h4>
-                      <p className="text-[10px] text-[var(--color-azul-escuro)]/35">
-                        {clubSubtitles[club.name] || club.description?.split('—')[0]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="flex-1 h-1.5 bg-[var(--color-surface-low)] rounded-full overflow-hidden">
-                      <div
-                        className={`h-full bg-gradient-to-r ${color} rounded-full transition-all`}
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-                    <span className="text-[10px] font-semibold text-[var(--color-azul-escuro)]/30">{progress}%</span>
-                  </div>
-                  {totalLessons > 0 && (
-                    <p className="text-[10px] text-[var(--color-azul-escuro)]/25 mt-2">
-                      {completedInClub}/{totalLessons} aulas concluídas
-                    </p>
-                  )}
-                </Link>
-              )
-            })}
-          </div>
-        </div>
-      ) : (
-        <div className="bg-[var(--color-rosa-light)] rounded-2xl p-6 mb-6">
-          <h3 className="font-bold text-[var(--color-azul-escuro)] mb-2">Escolha seus clubes</h3>
-          <p className="text-sm text-[var(--color-azul-escuro)]/60 mb-4">Você ainda não selecionou seus clubes. Explore o conteúdo disponível!</p>
-          <Link href="/meu-plano" className="inline-flex items-center gap-2 bg-[var(--color-azul-escuro)] text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:opacity-90">
-            Escolher clubes <ArrowRight className="h-4 w-4" />
+      {/* Clubs Carousel */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-bold text-[var(--color-azul-escuro)]">Meus Clubes</h3>
+          <Link href="/meu-plano" className="text-sm text-[var(--color-laranja)] font-medium hover:text-[var(--color-laranja-hover)]">
+            {hasClubs ? 'Gerenciar' : 'Escolher clubes'}
           </Link>
         </div>
-      )}
+
+        <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-hide" style={{ scrollSnapType: 'x mandatory' }}>
+          {allClubs.map((club) => {
+            const isMember = userClubIds.has(club.id)
+            const subtitle = clubSubtitles[club.name] || club.description?.split('—')[0]?.trim() || ''
+
+            return (
+              <div key={club.id} className="shrink-0 scroll-snap-start" style={{ scrollSnapAlign: 'start' }}>
+                {isMember ? (
+                  <Link href="/conteudo-gratuito" className="block group">
+                    <div className="relative w-[220px] h-[300px] rounded-[1.5rem] overflow-hidden shadow-[0_8px_32px_rgba(48,51,66,0.1)]">
+                      {club.imageUrl ? (
+                        <img src={club.imageUrl.startsWith('/uploads/') ? `/api${club.imageUrl}` : club.imageUrl} alt={club.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)]" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h4 className="text-white font-bold text-lg leading-tight">{club.name}</h4>
+                        <p className="text-white/60 text-xs mt-0.5">{subtitle}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  <Link href="/meu-plano" className="block group">
+                    <div className="relative w-[220px] h-[300px] rounded-[1.5rem] overflow-hidden shadow-[0_4px_16px_rgba(48,51,66,0.06)]">
+                      {club.imageUrl ? (
+                        <img src={club.imageUrl.startsWith('/uploads/') ? `/api${club.imageUrl}` : club.imageUrl} alt={club.name} className="absolute inset-0 w-full h-full object-cover grayscale opacity-40" />
+                      ) : (
+                        <div className="absolute inset-0 bg-[var(--color-surface-low)]" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/20" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                          <Lock className="h-5 w-5 text-white/70" />
+                        </div>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h4 className="text-white/60 font-bold text-lg leading-tight">{club.name}</h4>
+                        <p className="text-white/30 text-xs mt-0.5">{subtitle}</p>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      </div>
 
       {/* Weekly Theme + Challenge */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        {/* Weekly Theme */}
         <div className="bg-[var(--color-surface-lowest)] rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.04)]">
           {activeWeek ? (
             <div>
@@ -174,7 +136,6 @@ export default async function DashboardPage() {
           )}
         </div>
 
-        {/* Challenge */}
         <div className="bg-gradient-to-br from-[var(--color-laranja-light)] to-[var(--color-surface-lowest)] rounded-2xl p-6">
           <h3 className="font-bold text-[var(--color-laranja)] mb-2">Desafio: Gravação de Áudio</h3>
           <p className="text-sm text-[var(--color-azul-escuro)]/60 mb-4">
@@ -211,7 +172,7 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Community Mini Feed */}
+      {/* Community */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-bold text-[var(--color-azul-escuro)]">Comunidade</h3>
@@ -228,9 +189,7 @@ export default async function DashboardPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-[var(--color-azul-escuro)]">{post.author.name}</p>
-                  <p className="text-[10px] text-muted-foreground">
-                    {format(post.createdAt, "d 'de' MMM", { locale: ptBR })}
-                  </p>
+                  <p className="text-[10px] text-muted-foreground">{format(post.createdAt, "d 'de' MMM", { locale: ptBR })}</p>
                 </div>
               </div>
               <p className="text-sm text-[var(--color-azul-escuro)]/70 line-clamp-3 mb-3">{post.content}</p>
