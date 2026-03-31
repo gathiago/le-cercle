@@ -106,8 +106,11 @@ export function CommunityFeed({
             {/* Audio */}
             {post.audioUrl && (
               <div className="bg-[var(--color-surface-low)] rounded-2xl p-3 mb-3">
-                <audio controls className="w-full h-8">
-                  <source src={post.audioUrl} />
+                <audio controls className="w-full h-8" preload="metadata">
+                  <source src={post.audioUrl} type="audio/webm" />
+                  <source src={post.audioUrl} type="audio/mp4" />
+                  <source src={post.audioUrl} type="audio/ogg" />
+                  Seu navegador não suporta áudio.
                 </audio>
               </div>
             )}

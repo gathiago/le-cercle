@@ -9,7 +9,7 @@ async function saveLocal(file: Buffer, folder: string, fileName: string): Promis
   const filePath = join(dir, safeName)
   await writeFile(filePath, file)
 
-  return `/uploads/${folder}/${safeName}`
+  return `/api/uploads/${folder}/${safeName}`
 }
 
 export async function uploadAudio(file: Buffer, fileName: string): Promise<string> {
