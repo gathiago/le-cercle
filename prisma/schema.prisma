@@ -346,3 +346,13 @@ model UserProduct {
   purchasedAt      DateTime       @default(now())
   @@unique([userId, digitalProductId])
 }
+
+// ==================== NEWSLETTER ====================
+
+model NewsletterSubscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  source    String?  @default("website")
+  createdAt DateTime @default(now())
+}

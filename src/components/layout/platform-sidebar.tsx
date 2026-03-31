@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { House, BookOpen, Books, VideoCamera, ChatCircleDots, Crown, UserCircle } from '@phosphor-icons/react'
+import { House, BookOpen, Books, VideoCamera, ChatCircleDots, PlayCircle, Crown, UserCircle } from '@phosphor-icons/react'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: House },
@@ -10,6 +10,7 @@ const navItems = [
   { href: '/biblioteca', label: 'Biblioteca', icon: Books },
   { href: '/encontros', label: 'Encontros', icon: VideoCamera },
   { href: '/comunidade', label: 'Comunidade', icon: ChatCircleDots },
+  { href: '/curso-gratuito', label: 'Curso Grátis', icon: PlayCircle },
   { href: '/premium', label: 'Premium', icon: Crown },
   { href: '/perfil', label: 'Perfil', icon: UserCircle },
 ]

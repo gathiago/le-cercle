@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   title: 'Le Cercle | Idiomas com Mardia',
   description: 'Plataforma de imersão em francês. Pratique, aprenda e conecte-se com uma comunidade exclusiva.',
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 }
 

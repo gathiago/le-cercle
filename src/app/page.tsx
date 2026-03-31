@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { LandingHero } from '@/components/landing/hero'
 import { LandingFeatures } from '@/components/landing/features'
 import { LandingTestimonials } from '@/components/landing/testimonials'
+import { LandingProducts } from '@/components/landing/products'
 import { LandingPricing } from '@/components/landing/pricing'
 import { LandingFaq } from '@/components/landing/faq'
 import { LandingCta } from '@/components/landing/cta'
@@ -99,6 +100,7 @@ export default function LandingPage() {
       </section>
 
       <LandingTestimonials />
+      <LandingProducts />
       <LandingPricing />
       <LandingFaq />
       <LandingCta />
