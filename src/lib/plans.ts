@@ -22,7 +22,7 @@ export const PLANS: Plan[] = [
     interval: 'month',
     intervalCount: 1,
     features: [
-      'Conteúdo semanal exclusivo',
+      '1 Clube de conteúdo',
       'Comunidade Le Cercle',
       'Encontros online ao vivo',
     ],
@@ -36,9 +36,9 @@ export const PLANS: Plan[] = [
     interval: 'quarter',
     intervalCount: 3,
     features: [
-      'Tudo do plano Mensal',
-      'Material de apoio PDF',
-      'Economia de ~15%',
+      '3 Clubes de conteúdo',
+      'Comunidade Le Cercle',
+      'Material PDF extra',
     ],
     isPremium: false,
     badge: 'ECONOMIZE 15%',
@@ -52,7 +52,7 @@ export const PLANS: Plan[] = [
     interval: 'year',
     intervalCount: 12,
     features: [
-      'Tudo do plano Mensal',
+      'Todos os Clubes',
       'Prioridade nos encontros',
       'Economia de ~30%',
     ],
@@ -68,9 +68,9 @@ export const PLANS: Plan[] = [
     interval: 'year',
     intervalCount: 12,
     features: [
-      'Acesso total a tudo',
-      'Encontros presenciais',
-      'Experiência exclusiva',
+      'Todos os Clubes + exclusivos',
+      'Eventos presenciais',
+      'Experiência VIP',
     ],
     isPremium: true,
     badge: 'EXCLUSIVO',

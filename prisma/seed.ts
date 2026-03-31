@@ -464,7 +464,37 @@ async function main() {
     })
   }
 
-  // Canva embed removido — não funciona em domínios externos
+  // ===== CURSO 2: Material Présent de l'Indicatif (link externo) =====
+  const curso2 = await prisma.course.upsert({
+    where: { slug: 'material-present-indicatif' },
+    update: {},
+    create: {
+      slug: 'material-present-indicatif',
+      title: 'Material: Présent de l\'Indicatif',
+      description: 'Apresentação completa com explicações visuais sobre o presente do indicativo em francês. Material complementar ao curso em vídeo.',
+      level: 'INICIANTE',
+      clubId: clubBasico.id,
+      isFree: true,
+      isPublished: true,
+      sortOrder: 2,
+    },
+  })
+
+  await prisma.lesson.upsert({
+    where: { courseId_slug: { courseId: curso2.id, slug: 'apresentacao-completa' } },
+    update: {},
+    create: {
+      slug: 'apresentacao-completa',
+      title: 'Présent de l\'Indicatif — Apresentação Completa',
+      materialUrl: 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view',
+      materialName: 'Apresentação Canva',
+      content: 'Clique no botão abaixo para abrir o material completo sobre o Présent de l\'Indicatif. A apresentação abre em uma nova aba.',
+      duration: 30,
+      courseId: curso2.id,
+      sortOrder: 1,
+      isPublished: true,
+    },
+  })
 
   console.log('')
   console.log('=== SEED CONCLUÍDO ===')
