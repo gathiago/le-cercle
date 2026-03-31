@@ -129,57 +129,57 @@
 
 /* ===== DARK MODE ===== */
 .dark {
-  --background: #141418;
-  --foreground: #e4e4e7;
+  --background: #0f0f13;
+  --foreground: #ededef;
 
-  --card: #1c1c22;
-  --card-foreground: #e4e4e7;
+  --card: #1a1a22;
+  --card-foreground: #ededef;
 
-  --popover: #1c1c22;
-  --popover-foreground: #e4e4e7;
+  --popover: #1a1a22;
+  --popover-foreground: #ededef;
 
   --primary: #FF9FAF;
-  --primary-foreground: #1c1c22;
+  --primary-foreground: #1a1a22;
 
   --secondary: #FC8E60;
-  --secondary-foreground: #1c1c22;
+  --secondary-foreground: #1a1a22;
 
-  --muted: #25252d;
-  --muted-foreground: #a1a1aa;
+  --muted: #242430;
+  --muted-foreground: #a8a8b3;
 
-  --accent: #2a1f22;
-  --accent-foreground: #e4e4e7;
+  --accent: #2d1f24;
+  --accent-foreground: #ededef;
 
   --border: transparent;
-  --input: #25252d;
+  --input: #242430;
   --ring: #FF9FAF;
 
   --chart-1: #FF9FAF;
   --chart-2: #FC8E60;
   --chart-3: #c97080;
   --chart-4: #e08a5a;
-  --chart-5: #71717a;
+  --chart-5: #a8a8b3;
 
-  --sidebar: #111115;
-  --sidebar-foreground: #e4e4e7;
+  --sidebar: #0c0c10;
+  --sidebar-foreground: #ededef;
   --sidebar-primary: #FF9FAF;
-  --sidebar-primary-foreground: #1c1c22;
-  --sidebar-accent: #25252d;
-  --sidebar-accent-foreground: #e4e4e7;
+  --sidebar-primary-foreground: #1a1a22;
+  --sidebar-accent: #242430;
+  --sidebar-accent-foreground: #ededef;
   --sidebar-border: transparent;
   --sidebar-ring: #FF9FAF;
 
-  --color-rosa: #FF9FAF;
-  --color-laranja: #FC8E60;
-  --color-azul-escuro: #e4e4e7;
-  --color-cinza-claro: #25252d;
-  --color-rosa-hover: #FF8A9D;
-  --color-laranja-hover: #E87A4D;
-  --color-rosa-light: #2a1f22;
-  --color-laranja-light: #2a2118;
-  --color-surface: #141418;
-  --color-surface-low: #1e1e26;
-  --color-surface-lowest: #282832;
+  --color-rosa: #FFB1BE;
+  --color-laranja: #FFA070;
+  --color-azul-escuro: #ededef;
+  --color-cinza-claro: #242430;
+  --color-rosa-hover: #FF9FAF;
+  --color-laranja-hover: #FC8E60;
+  --color-rosa-light: #2d1f24;
+  --color-laranja-light: #2d2218;
+  --color-surface: #0f0f13;
+  --color-surface-low: #1a1a22;
+  --color-surface-lowest: #242430;
 }
 
 @layer base {
