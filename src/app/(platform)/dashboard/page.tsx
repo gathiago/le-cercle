@@ -1,11 +1,12 @@
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
-import { ArrowRight, Music, Play, BookText, Heart, MessageCircle, Lock } from 'lucide-react'
+import { ArrowRight, Music, Play, BookText, Heart, MessageCircle } from 'lucide-react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 import { WelcomeTour } from '@/components/tour/welcome-tour'
+import { ClubsCarousel } from '@/components/dashboard/clubs-carousel'
 
 const clubSubtitles: Record<string, string> = {
   'Premiers Pas Club': 'Clube de Iniciantes',
@@ -86,56 +87,16 @@ export default async function DashboardPage() {
           </Link>
         </div>
 
-        <div className="relative">
-        <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-hide" style={{ scrollSnapType: 'x mandatory' }}>
-          {sortedClubs.map((club) => {
-            const isMember = userClubIds.has(club.id)
-            const subtitle = clubSubtitles[club.name] || club.description?.split('—')[0]?.trim() || ''
-
-            return (
-              <div key={club.id} className="shrink-0 scroll-snap-start" style={{ scrollSnapAlign: 'start' }}>
-                {isMember ? (
-                  <Link href={`/clube/${club.slug}`} className="block group">
-                    <div className="relative w-[220px] h-[300px] rounded-[1.5rem] overflow-hidden shadow-[0_8px_32px_rgba(48,51,66,0.1)]">
-                      {club.imageUrl ? (
-                        <img src={club.imageUrl.startsWith('/uploads/') ? `/api${club.imageUrl}` : club.imageUrl} alt={club.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-rosa)]" />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <h4 className="text-white font-bold text-lg leading-tight">{club.name}</h4>
-                        <p className="text-white/60 text-xs mt-0.5">{subtitle}</p>
-                      </div>
-                    </div>
-                  </Link>
-                ) : (
-                  <Link href="/checkout" className="block group">
-                    <div className="relative w-[220px] h-[300px] rounded-[1.5rem] overflow-hidden shadow-[0_4px_16px_rgba(48,51,66,0.06)]">
-                      {club.imageUrl ? (
-                        <img src={club.imageUrl.startsWith('/uploads/') ? `/api${club.imageUrl}` : club.imageUrl} alt={club.name} className="absolute inset-0 w-full h-full object-cover grayscale opacity-40" />
-                      ) : (
-                        <div className="absolute inset-0 bg-[var(--color-surface-low)]" />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/20" />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center">
-                          <Lock className="h-5 w-5 text-white/70" />
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <h4 className="text-white/60 font-bold text-lg leading-tight">{club.name}</h4>
-                        <p className="text-white/30 text-xs mt-0.5">{subtitle}</p>
-                      </div>
-                    </div>
-                  </Link>
-                )}
-              </div>
-            )
-          })}
-        </div>
-        <div className="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-[var(--color-surface)] to-transparent pointer-events-none lg:hidden" />
-        </div>
+        <ClubsCarousel
+          clubs={sortedClubs.map(club => ({
+            id: club.id,
+            slug: club.slug,
+            name: club.name,
+            imageUrl: club.imageUrl,
+            subtitle: clubSubtitles[club.name] || club.description?.split('—')[0]?.trim() || '',
+            isMember: userClubIds.has(club.id),
+          }))}
+        />
       </div>
 
       {/* Weekly Theme + Challenge */}
