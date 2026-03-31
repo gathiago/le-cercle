@@ -4,11 +4,6 @@ import { prisma } from '@/lib/prisma'
 import { getPlanById, type PlanId } from '@/lib/plans'
 
 export async function POST(request: Request) {
-  // Block in production - this is for demo/testing only
-  if (process.env.NODE_ENV === 'production') {
-    return NextResponse.json({ error: 'Não disponível' }, { status: 404 })
-  }
-
   try {
     const { name, email, password, phone, plan, couponCode, clubs } = await request.json()
 
