@@ -367,6 +367,110 @@ async function main() {
     },
   })
 
+  // ===== PRODUTO DIGITAL: Resumos Verbais =====
+  await prisma.digitalProduct.upsert({
+    where: { slug: 'resumos-verbais' },
+    update: {},
+    create: {
+      slug: 'resumos-verbais',
+      title: 'Resumos Verbais',
+      description: 'Os principais tempos verbais do francês num só lugar! E-book com explicações, exercícios, correções e 3 vídeo aulas.',
+      price: 47.00,
+      fileUrl: '/uploads/produtos/resumos-verbais.pdf',
+      fileName: 'Resumos-Verbais-Le-Cercle.pdf',
+      isActive: true,
+    },
+  })
+
+  // ===== CLUBE: Francês Básico =====
+  const clubBasico = await prisma.club.upsert({
+    where: { slug: 'frances-basico' },
+    update: {},
+    create: {
+      slug: 'frances-basico',
+      name: 'Francês Básico',
+      description: 'Conteúdo fundamental para quem está começando no francês. Acessível a todos os planos.',
+      minPlan: 'monthly',
+      sortOrder: 1,
+    },
+  })
+
+  const clubPremium = await prisma.club.upsert({
+    where: { slug: 'experiencias-premium' },
+    update: {},
+    create: {
+      slug: 'experiencias-premium',
+      name: 'Experiências Premium',
+      description: 'Conteúdo exclusivo para membros Premium. Masterclasses, entrevistas e imersões culturais.',
+      minPlan: 'premium',
+      sortOrder: 2,
+    },
+  })
+
+  // ===== CURSO: Primeiros Passos no Francês =====
+  const curso1 = await prisma.course.upsert({
+    where: { slug: 'primeiros-passos' },
+    update: {},
+    create: {
+      slug: 'primeiros-passos',
+      title: 'Primeiros Passos no Francês',
+      description: 'Seu ponto de partida para falar francês. Aprenda a se apresentar, cumprimentar e ter conversas básicas.',
+      level: 'INICIANTE',
+      clubId: clubBasico.id,
+      isPublished: true,
+      sortOrder: 1,
+    },
+  })
+
+  // Aulas do curso
+  await prisma.lesson.upsert({
+    where: { courseId_slug: { courseId: curso1.id, slug: 'se-apresentar' } },
+    update: {},
+    create: {
+      slug: 'se-apresentar',
+      title: 'Como se apresentar em francês',
+      description: 'Aprenda a dizer seu nome, de onde você é e o que faz.',
+      videoUrl: 'https://www.youtube.com/embed/LB2Y6fKq5uo',
+      content: 'Nesta aula você vai aprender as expressões fundamentais para se apresentar em francês: Je m\'appelle..., J\'habite à..., Je suis...',
+      duration: 15,
+      courseId: curso1.id,
+      sortOrder: 1,
+      isPublished: true,
+    },
+  })
+
+  await prisma.lesson.upsert({
+    where: { courseId_slug: { courseId: curso1.id, slug: 'cumprimentos' } },
+    update: {},
+    create: {
+      slug: 'cumprimentos',
+      title: 'Cumprimentos e saudações',
+      description: 'Bonjour, bonsoir, salut... Aprenda quando usar cada saudação.',
+      videoUrl: 'https://www.youtube.com/embed/rOjHhS5MtvA',
+      content: 'Os franceses valorizam muito as saudações. Nesta aula você aprende as formas formais e informais de cumprimentar.',
+      duration: 12,
+      courseId: curso1.id,
+      sortOrder: 2,
+      isPublished: true,
+    },
+  })
+
+  await prisma.lesson.upsert({
+    where: { courseId_slug: { courseId: curso1.id, slug: 'numeros-basicos' } },
+    update: {},
+    create: {
+      slug: 'numeros-basicos',
+      title: 'Números de 1 a 100',
+      description: 'Domine os números em francês para contar, dar seu telefone e falar de preços.',
+      videoUrl: 'https://www.youtube.com/embed/0gXvVUg2-bY',
+      content: 'Os números em francês têm algumas particularidades interessantes. A partir do 70, a lógica muda completamente!',
+      duration: 18,
+      courseId: curso1.id,
+      sortOrder: 3,
+      isPublished: true,
+    },
+  })
+
   console.log('')
   console.log('=== SEED CONCLUÍDO ===')
   console.log('')

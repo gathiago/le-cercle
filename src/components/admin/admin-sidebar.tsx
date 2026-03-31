@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, BookOpen, Users, Calendar, MessageCircle, Crown, Ticket, Settings } from 'lucide-react'
+import { ShoppingBag, GraduationCap, UsersThree } from '@phosphor-icons/react'
 
 const adminNav = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -12,6 +13,9 @@ const adminNav = [
   { href: '/admin/comunidade', label: 'Comunidade', icon: MessageCircle },
   { href: '/admin/premium', label: 'Premium', icon: Crown },
   { href: '/admin/cupons', label: 'Cupons', icon: Ticket },
+  { href: '/admin/produtos', label: 'Produtos', icon: ShoppingBag },
+  { href: '/admin/cursos', label: 'Cursos', icon: GraduationCap },
+  { href: '/admin/clubes', label: 'Clubes', icon: UsersThree },
   { href: '/admin/configuracoes', label: 'Config', icon: Settings },
 ]
 

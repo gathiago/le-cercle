@@ -6,7 +6,7 @@ import { ArrowRight, Check, BookOpen, Star, Clock, FileText, VideoCamera, Shield
 
 const spring = { type: 'spring' as const, stiffness: 100, damping: 20 }
 
-const HOTMART_LINK = 'https://pay.hotmart.com/X103629578S?bid=1774925349936'
+const PURCHASE_LINK = '/produto/resumos-verbais'
 
 const temposVerbais = [
   'Presente do indicativo',
@@ -66,9 +66,7 @@ export default function ResumosVerbaisPage() {
             </p>
 
             <a
-              href={HOTMART_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={PURCHASE_LINK}
               className="group inline-flex items-center h-14 px-10 rounded-xl bg-gradient-to-br from-[var(--color-secondary)] to-[var(--color-laranja)] text-white font-semibold text-base transition-all active:scale-[0.98] shadow-[0_12px_32px_rgba(252,142,96,0.25)]"
               style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}
             >
@@ -199,9 +197,7 @@ export default function ResumosVerbaisPage() {
 
           <div className="text-center">
             <a
-              href={HOTMART_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={PURCHASE_LINK}
               className="group inline-flex items-center h-14 px-10 rounded-xl bg-gradient-to-br from-[var(--color-secondary)] to-[var(--color-laranja)] text-white font-semibold text-base transition-all active:scale-[0.98] shadow-[0_12px_32px_rgba(252,142,96,0.25)]"
               style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}
             >
@@ -292,9 +288,7 @@ export default function ResumosVerbaisPage() {
             Os principais tempos verbais do francês, exercícios e vídeo aulas num só lugar.
           </p>
           <a
-            href={HOTMART_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={PURCHASE_LINK}
             className="group inline-flex items-center h-14 px-10 rounded-xl bg-white text-[var(--color-azul-escuro)] font-bold text-base hover:bg-white/90 transition-colors active:scale-[0.98] shadow-[0_12px_32px_rgba(0,0,0,0.1)]"
           >
             Comprar agora
