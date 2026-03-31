@@ -1,0 +1,120 @@
+============================================================
+  LE CERCLE — Idiomas com Mardia
+  Plataforma de imersão em francês
+============================================================
+
+SITE: https://club.isabevilaqua.com
+GITHUB: https://github.com/gathiago/le-cercle
+
+============================================================
+  LOGINS
+============================================================
+
+ADMIN (gestora):
+  Email: mardia@lecercle.com
+  Senha: admin123
+  Acesso: https://club.isabevilaqua.com/login
+  Admin:  https://club.isabevilaqua.com/admin
+
+MEMBRO DEMO (Mardia como aluna):
+  Email: mardia@idiomascommardia.com
+  Senha: mardia123
+
+MEMBRO — Isadora:
+  Email: isa@lecercle.com
+  Senha: isa12345
+
+MEMBRO — Thiago:
+  Email: thiago@lecercle.com
+  Senha: thiago123
+
+CUPOM DE DESCONTO: BONJOUR20 (20% off)
+
+============================================================
+  PÁGINAS PÚBLICAS
+============================================================
+
+Homepage (landing page):     https://club.isabevilaqua.com
+Checkout (planos):           https://club.isabevilaqua.com/checkout
+Cadastro:                    https://club.isabevilaqua.com/checkout/cadastro
+Login:                       https://club.isabevilaqua.com/login
+Esqueci a senha:             https://club.isabevilaqua.com/forgot-password
+Newsletter:                  https://club.isabevilaqua.com/newsletter
+Termos de Uso:               https://club.isabevilaqua.com/termos
+Política de Privacidade:     https://club.isabevilaqua.com/privacidade
+
+PRODUTOS:
+  Resumos Verbais:           https://club.isabevilaqua.com/resumos-verbais
+  Guia do DELF B2:           https://club.isabevilaqua.com/guia-delf-b2
+  Compra Resumos Verbais:    https://club.isabevilaqua.com/produto/resumos-verbais
+  Compra Guia DELF B2:       https://club.isabevilaqua.com/produto/guia-delf-b2
+
+============================================================
+  PÁGINAS DA PLATAFORMA (requer login)
+============================================================
+
+Dashboard:                   https://club.isabevilaqua.com/dashboard
+Semana (conteúdo ativo):     https://club.isabevilaqua.com/semana
+Biblioteca (todas semanas):  https://club.isabevilaqua.com/biblioteca
+Encontros:                   https://club.isabevilaqua.com/encontros
+Comunidade:                  https://club.isabevilaqua.com/comunidade
+Conteúdo Gratuito:           https://club.isabevilaqua.com/conteudo-gratuito
+Curso Présent Indicatif:     https://club.isabevilaqua.com/curso-gratuito
+Premium:                     https://club.isabevilaqua.com/premium
+Perfil:                      https://club.isabevilaqua.com/perfil
+Onboarding:                  https://club.isabevilaqua.com/onboarding
+
+============================================================
+  PAINEL ADMIN (requer login admin)
+============================================================
+
+Dashboard Admin:             https://club.isabevilaqua.com/admin/dashboard
+Semanas:                     https://club.isabevilaqua.com/admin/semanas
+Membros:                     https://club.isabevilaqua.com/admin/membros
+Encontros:                   https://club.isabevilaqua.com/admin/encontros
+Comunidade:                  https://club.isabevilaqua.com/admin/comunidade
+Premium:                     https://club.isabevilaqua.com/admin/premium
+Cupons:                      https://club.isabevilaqua.com/admin/cupons
+Produtos Digitais:           https://club.isabevilaqua.com/admin/produtos
+Cursos:                      https://club.isabevilaqua.com/admin/cursos
+Clubes:                      https://club.isabevilaqua.com/admin/clubes
+Newsletter:                  https://club.isabevilaqua.com/admin/newsletter
+Configurações:               https://club.isabevilaqua.com/admin/configuracoes
+
+============================================================
+  SERVIDOR (SSH)
+============================================================
+
+Host: mod.hostprostudio.com (85.239.239.55)
+User: root
+Caminho app: /home/isa/web/club.isabevilaqua.com/private/app
+PM2 nome: lecercle (porta 4000)
+
+Banco de dados:
+  Host: localhost (socket /var/run/mysqld/mysqld.sock)
+  DB: isa_frances
+  User: isa_fras
+  Senha: P(O;W1oDrTMEaav!
+
+Comandos para atualizar:
+  cd /home/isa/web/club.isabevilaqua.com/private/app
+  git pull
+  npx prisma db push --accept-data-loss --skip-generate
+  npx prisma generate
+  npx tsx prisma/seed.ts
+  npm run build
+  pm2 restart lecercle
+
+============================================================
+  BIBLIOTECA DE CONTEÚDO (seed)
+============================================================
+
+Semana 1: L'Art de Vivre à Paris (Iniciante)
+Semana 2: La Gastronomie Française (Iniciante)
+Semana 3: La Mode et le Style (Intermediário)
+Semana 4: La Culture et les Arts (Intermediário) — ATIVA
+
+Curso Gratuito: Présent de l'Indicatif (6 aulas YouTube)
+Produtos: Resumos Verbais (R$47) + Guia DELF B2 (R$39,90)
+
+============================================================
