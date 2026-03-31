@@ -74,7 +74,7 @@ export default function LandingPage() {
           <div className="flex justify-center md:justify-start">
             <div className="relative">
               <div className="w-60 h-60 md:w-72 md:h-72 rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(147,70,85,0.35)]">
-                <img src="/mardia-1.png" alt="Mardia Alcantara" className="w-full h-full object-cover" />
+                <img src="/mardia-2.png" alt="Mardia Alcantara" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-[var(--color-surface-lowest)] rounded-2xl px-5 py-3 shadow-[0_8px_24px_rgba(48,51,66,0.06)]">
                 <p className="text-[10px] text-[var(--color-azul-escuro)]/40 uppercase tracking-[2px] font-semibold">Mentora</p>
