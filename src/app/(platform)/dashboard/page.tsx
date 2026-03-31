@@ -23,12 +23,11 @@ export default async function DashboardPage() {
 
   const user = session.user
 
-  const currentUser = await prisma.user.findUnique({
-    where: { id: user.id },
-    select: { tourDone: true },
-  })
-
-  const [activeWeek, userClubMemberships, allClubs, recentPosts] = await Promise.all([
+  const [currentUser, activeWeek, userClubMemberships, allClubs, recentPosts] = await Promise.all([
+    prisma.user.findUnique({
+      where: { id: user.id },
+      select: { tourDone: true },
+    }),
     prisma.weekContent.findFirst({
       where: { isActive: true },
       orderBy: { weekNumber: 'desc' },

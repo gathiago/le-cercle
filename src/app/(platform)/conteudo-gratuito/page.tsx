@@ -3,22 +3,23 @@ import Link from 'next/link'
 import { BookOpen, PlayCircle, FileText, ArrowRight } from 'lucide-react'
 
 export default async function ConteudoGratuitoPage() {
-  const freeCourses = await prisma.course.findMany({
-    where: { isFree: true, isPublished: true },
-    orderBy: { sortOrder: 'asc' },
-    include: {
-      _count: { select: { lessons: true } },
-      lessons: {
-        where: { isPublished: true },
-        select: { materialUrl: true },
+  const [freeCourses, freeProducts] = await Promise.all([
+    prisma.course.findMany({
+      where: { isFree: true, isPublished: true },
+      orderBy: { sortOrder: 'asc' },
+      include: {
+        _count: { select: { lessons: true } },
+        lessons: {
+          where: { isPublished: true },
+          select: { materialUrl: true },
+        },
       },
-    },
-  })
-
-  const freeProducts = await prisma.digitalProduct.findMany({
-    where: { isActive: true, price: 0 },
-    orderBy: { createdAt: 'desc' },
-  })
+    }),
+    prisma.digitalProduct.findMany({
+      where: { isActive: true, price: 0 },
+      orderBy: { createdAt: 'desc' },
+    }).catch(() => []),
+  ])
 
   const hasContent = freeCourses.length > 0 || freeProducts.length > 0
 

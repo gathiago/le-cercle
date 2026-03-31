@@ -10,9 +10,11 @@ export default async function SemanaDetailPage({ params }: { params: Promise<{ w
   if (!session?.user) redirect('/login')
 
   const { weekNumber } = await params
+  const weekNum = parseInt(weekNumber, 10)
+  if (isNaN(weekNum)) notFound()
 
   const week = await prisma.weekContent.findUnique({
-    where: { weekNumber: Number(weekNumber) },
+    where: { weekNumber: weekNum },
   })
 
   if (!week) notFound()
