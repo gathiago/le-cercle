@@ -48,18 +48,20 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState({
     name: '',
     slug: '',
     description: '',
+    imageUrl: '',
     minPlan: 'monthly',
     isActive: true,
     sortOrder: '0',
   })
 
   function resetForm() {
-    setForm({ name: '', slug: '', description: '', minPlan: 'monthly', isActive: true, sortOrder: '0' })
+    setForm({ name: '', slug: '', description: '', imageUrl: '', minPlan: 'monthly', isActive: true, sortOrder: '0' })
     setEditingId(null)
   }
 
@@ -68,6 +70,7 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
       name: club.name,
       slug: club.slug,
       description: club.description,
+      imageUrl: (club as any).imageUrl || '',
       minPlan: club.minPlan,
       isActive: club.isActive,
       sortOrder: String(club.sortOrder),
@@ -93,6 +96,7 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...form,
+        imageUrl: form.imageUrl || null,
         sortOrder: Number(form.sortOrder),
       }),
     })
@@ -138,6 +142,43 @@ export function AdminClubsManager({ initialClubs }: { initialClubs: Club[] }) {
                   onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                   className="bg-[var(--color-surface-low)] border-none rounded-xl"
                 />
+              </div>
+              <div>
+                <Label>Imagem do Clube</Label>
+                <div className="flex gap-2">
+                  <Input
+                    value={form.imageUrl}
+                    onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
+                    placeholder="URL ou faça upload..."
+                    className="bg-[var(--color-surface-low)] border-none rounded-xl flex-1"
+                  />
+                  <label className="inline-flex items-center justify-center gap-1.5 bg-[var(--color-rosa)] hover:bg-[var(--color-rosa-hover)] text-white rounded-xl px-3 py-2 text-xs font-medium cursor-pointer transition-colors shrink-0">
+                    {uploading ? 'Enviando...' : 'Upload'}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0]
+                        if (!file) return
+                        setUploading(true)
+                        const fd = new FormData()
+                        fd.append('file', file)
+                        const res = await fetch('/api/admin/products/upload', { method: 'POST', body: fd })
+                        if (res.ok) {
+                          const data = await res.json()
+                          setForm(f => ({ ...f, imageUrl: data.fileUrl }))
+                        }
+                        setUploading(false)
+                      }}
+                    />
+                  </label>
+                </div>
+                {form.imageUrl && (
+                  <div className="mt-2 w-20 h-20 rounded-xl overflow-hidden bg-[var(--color-surface-low)]">
+                    <img src={form.imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>

@@ -109,8 +109,12 @@ export default async function DashboardPage() {
                   className="bg-[var(--color-surface-lowest)] rounded-[1.5rem] p-5 shadow-[0_4px_16px_rgba(48,51,66,0.04)] hover:shadow-[0_8px_24px_rgba(48,51,66,0.08)] transition-all group"
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white text-sm font-bold shrink-0`}>
-                      {club.name.charAt(0)}
+                    <div className={`w-10 h-10 rounded-xl overflow-hidden shrink-0 ${club.imageUrl ? '' : `bg-gradient-to-br ${color} flex items-center justify-center`}`}>
+                      {club.imageUrl ? (
+                        <img src={club.imageUrl} alt={club.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="text-white text-sm font-bold">{club.name.charAt(0)}</span>
+                      )}
                     </div>
                     <div className="min-w-0">
                       <h4 className="font-bold text-[var(--color-azul-escuro)] text-sm truncate group-hover:text-[var(--color-rosa)] transition-colors">
