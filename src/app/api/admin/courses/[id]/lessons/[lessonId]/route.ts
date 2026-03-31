@@ -18,6 +18,8 @@ export async function PUT(
       title: data.title,
       description: data.description || null,
       videoUrl: data.videoUrl || null,
+      materialUrl: data.materialUrl || null,
+      materialName: data.materialName || null,
       content: data.content || null,
       duration: data.duration || null,
       sortOrder: data.sortOrder,
