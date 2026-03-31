@@ -4,14 +4,15 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowRight, ArrowLeft, Sparkle, BookOpen, Users, Music, Crown, MessageCircle, GraduationCap } from 'lucide-react'
 
+// Ciclo de cores: azul > rosa > laranja > azul > rosa > laranja > rosa
 const steps = [
   {
     icon: Sparkle,
     title: 'Bienvenue au Cercle!',
     subtitle: 'Seu sal\u00e3o liter\u00e1rio de franc\u00eas',
     description: 'Que bom ter voc\u00ea aqui! Vamos fazer um tour r\u00e1pido para voc\u00ea conhecer tudo o que a plataforma oferece.',
-    gradient: 'from-[#934655] to-[#FF9FAF]',
-    iconBg: 'bg-[#FF9FAF]/30',
+    gradient: 'from-[#303342] to-[#4a4d5e]',
+    iconBg: 'bg-white/15',
     pattern: 'Estampa-Logo.png',
   },
   {
@@ -19,8 +20,8 @@ const steps = [
     title: 'Seus Clubes',
     subtitle: 'Conte\u00fado exclusivo por tema',
     description: 'Cada clube tem aulas, materiais e atividades pr\u00f3prias. Os clubes desbloqueados aparecem no seu Dashboard \u2014 clique em um para acessar os cursos e as aulas!',
-    gradient: 'from-[#9c441c] to-[#FC8E60]',
-    iconBg: 'bg-[#FC8E60]/30',
+    gradient: 'from-[#934655] to-[#FF9FAF]',
+    iconBg: 'bg-[#FF9FAF]/30',
     pattern: 'Estampa-Formas.png',
   },
   {
@@ -28,8 +29,8 @@ const steps = [
     title: 'Semana & Biblioteca',
     subtitle: 'Conte\u00fado semanal + arquivo completo',
     description: 'Toda semana tem um tema novo com v\u00eddeo, vocabul\u00e1rio, m\u00fasica e desafio. Na Biblioteca, voc\u00ea encontra todas as semanas anteriores organizadas por n\u00edvel.',
-    gradient: 'from-[#303342] to-[#934655]',
-    iconBg: 'bg-[#FF9FAF]/30',
+    gradient: 'from-[#9c441c] to-[#FC8E60]',
+    iconBg: 'bg-[#FC8E60]/30',
     pattern: 'Estampa-Logo.png',
   },
   {
@@ -37,8 +38,8 @@ const steps = [
     title: 'Encontros ao Vivo',
     subtitle: 'Pratique com outras alunas',
     description: 'Encontros online em grupo para praticar conversa\u00e7\u00e3o em franc\u00eas. Veja as datas na p\u00e1gina de Encontros e inscreva-se!',
-    gradient: 'from-[#934655] to-[#9c441c]',
-    iconBg: 'bg-white/20',
+    gradient: 'from-[#303342] to-[#4a4d5e]',
+    iconBg: 'bg-white/15',
     pattern: 'Estampa-Formas.png',
   },
   {
@@ -46,8 +47,8 @@ const steps = [
     title: 'Comunidade',
     subtitle: 'Seu espa\u00e7o para compartilhar',
     description: 'Poste textos em franc\u00eas, grave \u00e1udios, tire d\u00favidas e interaja com outras alunas. A comunidade \u00e9 o cora\u00e7\u00e3o do Le Cercle!',
-    gradient: 'from-[#303342] to-[#FC8E60]',
-    iconBg: 'bg-[#FC8E60]/30',
+    gradient: 'from-[#934655] to-[#FF9FAF]',
+    iconBg: 'bg-[#FF9FAF]/30',
     pattern: 'Estampa-Logo.png',
   },
   {
@@ -55,8 +56,8 @@ const steps = [
     title: 'Meu Plano',
     subtitle: 'Acompanhe sua assinatura',
     description: 'Veja seus clubes ativos e o seu plano atual. Quer acesso a mais clubes? Fa\u00e7a um upgrade e desbloqueie todos!',
-    gradient: 'from-[#9c441c] to-[#934655]',
-    iconBg: 'bg-white/20',
+    gradient: 'from-[#9c441c] to-[#FC8E60]',
+    iconBg: 'bg-[#FC8E60]/30',
     pattern: 'Estampa-Formas.png',
   },
   {
@@ -64,8 +65,8 @@ const steps = [
     title: 'Tudo pronto!',
     subtitle: 'Sua jornada come\u00e7a agora',
     description: 'Explore seus clubes, assista \u00e0s aulas e participe da comunidade. Bon courage et amusez-vous bien!',
-    gradient: 'from-[#FF9FAF] to-[#FC8E60]',
-    iconBg: 'bg-white/25',
+    gradient: 'from-[#934655] to-[#FF9FAF]',
+    iconBg: 'bg-[#FF9FAF]/30',
     pattern: 'Estampa-Logo.png',
   },
 ]
