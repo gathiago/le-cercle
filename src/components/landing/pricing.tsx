@@ -7,10 +7,10 @@ import { Check, Lightning } from '@phosphor-icons/react'
 const spring = { type: 'spring' as const, stiffness: 100, damping: 20 }
 
 const plans = [
-  { id: 'monthly', name: 'Mensal', price: '49,90', monthly: '49,90', period: null, features: ['1 Clube de conteúdo', 'Comunidade Le Cercle', 'Encontros online'] },
-  { id: 'quarterly', name: 'Trimestral', price: '127,70', monthly: '42,57', period: 'por trimestre', badge: '-15%', features: ['3 Clubes de conteúdo', 'Comunidade Le Cercle', 'Material PDF extra'] },
-  { id: 'yearly', name: 'Anual', price: '419,90', monthly: '34,99', period: 'anualmente', badge: 'Popular', popular: true, features: ['Todos os Clubes', 'Prioridade nos encontros', 'Economia de 30%'] },
-  { id: 'premium', name: 'Premium', price: '899,90', monthly: '74,99', period: 'anualmente', badge: 'Exclusivo', premium: true, features: ['Todos os Clubes + exclusivos', 'Eventos presenciais', 'Experiência VIP'] },
+  { id: 'monthly', name: 'Mensal', price: '49,90', monthly: '49,90', period: null, features: ['1 Clube à sua escolha', 'Comunidade Le Cercle', 'Encontros online'] },
+  { id: 'quarterly', name: 'Trimestral', price: '127,70', monthly: '42,57', period: 'por trimestre', badge: '-15%', features: ['3 Clubes à sua escolha', 'Comunidade Le Cercle', 'Material PDF extra'] },
+  { id: 'yearly', name: 'Anual', price: '419,90', monthly: '34,99', period: 'anualmente', badge: 'Popular', popular: true, features: ['Todos os 6 Clubes', 'Prioridade nos encontros', 'Economia de 30%'] },
+  { id: 'premium', name: 'Premium', price: '899,90', monthly: '74,99', period: 'anualmente', badge: 'Exclusivo', premium: true, features: ['Todos os 6 Clubes', 'Encontros presenciais (RJ)', 'Experiência VIP'] },
 ]
 
 export function LandingPricing() {

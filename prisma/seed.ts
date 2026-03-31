@@ -397,30 +397,80 @@ async function main() {
     },
   })
 
-  // ===== CLUBE: Francês Básico =====
-  const clubBasico = await prisma.club.upsert({
-    where: { slug: 'frances-basico' },
+  // ===== 6 CLUBES =====
+  const clubIniciantes = await prisma.club.upsert({
+    where: { slug: 'premiers-pas-club' },
     update: {},
     create: {
-      slug: 'frances-basico',
-      name: 'Francês Básico',
-      description: 'Conteúdo fundamental para quem está começando no francês. Acessível a todos os planos.',
+      slug: 'premiers-pas-club',
+      name: 'Premiers Pas Club',
+      description: 'Clube Iniciantes — Para quem está começando no francês. Vocabulário básico, frases do dia a dia e primeiros passos na conversação.',
       minPlan: 'monthly',
       sortOrder: 1,
     },
   })
 
-  const clubPremium = await prisma.club.upsert({
-    where: { slug: 'experiencias-premium' },
+  await prisma.club.upsert({
+    where: { slug: 'club-intermediaire' },
     update: {},
     create: {
-      slug: 'experiencias-premium',
-      name: 'Experiências Premium',
-      description: 'Conteúdo exclusivo para membros Premium. Masterclasses, entrevistas e imersões culturais.',
-      minPlan: 'premium',
+      slug: 'club-intermediaire',
+      name: 'Club Intermédiaire',
+      description: 'Clube Intermediários — Para quem já tem base e quer avançar. Conversação mais fluida, gramática aplicada e conteúdo cultural.',
+      minPlan: 'monthly',
       sortOrder: 2,
     },
   })
+
+  await prisma.club.upsert({
+    where: { slug: 'fluent-club' },
+    update: {},
+    create: {
+      slug: 'fluent-club',
+      name: 'Fluent Club',
+      description: 'Clube Avançados — Debates, cultura aprofundada e fluência real. Para quem quer dominar o francês de verdade.',
+      minPlan: 'monthly',
+      sortOrder: 3,
+    },
+  })
+
+  await prisma.club.upsert({
+    where: { slug: 'nuit-club' },
+    update: {},
+    create: {
+      slug: 'nuit-club',
+      name: 'Nuit Club',
+      description: 'Clube de Música — Músicas francesas com análise de letras, vocabulário e expressões. Descubra a música francesa.',
+      minPlan: 'monthly',
+      sortOrder: 4,
+    },
+  })
+
+  await prisma.club.upsert({
+    where: { slug: 'noir-lecture-club' },
+    update: {},
+    create: {
+      slug: 'noir-lecture-club',
+      name: 'Noir Lecture Club',
+      description: 'Clube de Leitura — Leitura guiada de textos, livros e artigos em francês. Discussões semanais sobre os temas.',
+      minPlan: 'monthly',
+      sortOrder: 5,
+    },
+  })
+
+  await prisma.club.upsert({
+    where: { slug: 'cine-noir-club' },
+    update: {},
+    create: {
+      slug: 'cine-noir-club',
+      name: 'Ciné Noir Club',
+      description: 'Clube de Cinema — Filmes e séries francesas com análise de vocabulário, expressões e cultura.',
+      minPlan: 'monthly',
+      sortOrder: 6,
+    },
+  })
+
+  const clubBasico = clubIniciantes
 
   // ===== CURSO: Primeiros Passos no Francês =====
   // ===== CURSO 1: Présent de l'Indicatif (YouTube) =====

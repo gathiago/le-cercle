@@ -42,7 +42,7 @@ export default function CheckoutPage() {
   function handleContinue() {
     const params = new URLSearchParams({ plan: selectedPlan })
     if (couponValid && couponCode) params.set('coupon', couponCode)
-    router.push(`/checkout/cadastro?${params.toString()}`)
+    router.push(`/checkout/clubes?${params.toString()}`)
   }
 
   function getDiscountedPrice(plan: Plan) {
