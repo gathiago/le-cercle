@@ -15,7 +15,7 @@ const mainNav = [
 const moreNav = [
   { href: '/conteudo-gratuito', label: 'Conteúdo Grátis', icon: PlayCircle },
   { href: '/biblioteca', label: 'Biblioteca', icon: Books },
-  { href: '/premium', label: 'Premium', icon: Crown },
+  { href: '/meu-plano', label: 'Meu Plano', icon: Crown },
   { href: '/perfil', label: 'Perfil', icon: UserCircle },
 ]
 

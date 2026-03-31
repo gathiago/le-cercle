@@ -11,7 +11,7 @@ const navItems = [
   { href: '/encontros', label: 'Encontros', icon: VideoCamera },
   { href: '/comunidade', label: 'Comunidade', icon: ChatCircleDots },
   { href: '/conteudo-gratuito', label: 'Grátis', icon: PlayCircle },
-  { href: '/premium', label: 'Premium', icon: Crown },
+  { href: '/meu-plano', label: 'Meu Plano', icon: Crown },
   { href: '/perfil', label: 'Perfil', icon: UserCircle },
 ]
 

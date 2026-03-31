@@ -144,8 +144,8 @@ export default async function DashboardPage() {
         <div className="bg-[var(--color-rosa-light)] rounded-2xl p-6 mb-6">
           <h3 className="font-bold text-[var(--color-azul-escuro)] mb-2">Escolha seus clubes</h3>
           <p className="text-sm text-[var(--color-azul-escuro)]/60 mb-4">Você ainda não selecionou seus clubes. Explore o conteúdo disponível!</p>
-          <Link href="/conteudo-gratuito" className="inline-flex items-center gap-2 bg-[var(--color-azul-escuro)] text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:opacity-90">
-            Explorar clubes <ArrowRight className="h-4 w-4" />
+          <Link href="/meu-plano" className="inline-flex items-center gap-2 bg-[var(--color-azul-escuro)] text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:opacity-90">
+            Escolher clubes <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       )}
