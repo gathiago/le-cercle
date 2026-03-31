@@ -58,6 +58,7 @@ model User {
   posts               Post[]
   comments            Comment[]
   reactions           Reaction[]
+  products            UserProduct[]
 }
 
 enum Level {
@@ -202,4 +203,34 @@ model PremiumEvent {
   spotsLeft   Int
   imageUrl    String?  @db.Text
   createdAt   DateTime @default(now())
+}
+
+// Produtos digitais (e-books, apostilas, etc.)
+model DigitalProduct {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  description String   @db.Text
+  price       Float
+  imageUrl    String?  @db.Text
+  contentUrl  String?  @db.Text
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  purchases   UserProduct[]
+}
+
+// Compras de produtos digitais por usuários
+model UserProduct {
+  id               String         @id @default(uuid())
+  userId           String
+  user             User           @relation(fields: [userId], references: [id])
+  digitalProductId String
+  digitalProduct   DigitalProduct @relation(fields: [digitalProductId], references: [id])
+  paymentMethod    String?
+  paymentId        String?
+  amountPaid       Float?
+  purchasedAt      DateTime       @default(now())
+
+  @@unique([userId, digitalProductId])
 }
