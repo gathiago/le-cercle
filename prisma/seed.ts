@@ -202,8 +202,8 @@ async function main() {
       title: "La Culture et les Arts",
       description: "Explore o universo cultural francês: cinema, literatura, música e artes plásticas. Aprenda a expressar opiniões e debater sobre cultura.",
       level: 'INTERMEDIARIO',
-      musicUrl: 'https://open.spotify.com/track/3CeCwYWvdfXbZLKhxaYOBN',
-      videoUrl: 'https://www.youtube.com/embed/rOjHhS5MtvA',
+      musicUrl: 'https://open.spotify.com/track/2LTlO3NuNVN70lp2ZbLswZ',
+      videoUrl: 'https://www.youtube.com/embed/AXnqkVTFUqs',
       vocabulary: [
         { word: 'Le Cinéma', translation: 'O Cinema' },
         { word: 'Le Tableau', translation: 'O Quadro / Pintura' },
@@ -486,7 +486,8 @@ async function main() {
     create: {
       slug: 'apresentacao-completa',
       title: 'Présent de l\'Indicatif — Apresentação Completa',
-      materialUrl: 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view',
+      videoUrl: 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view?utm_content=DAFs205OVsA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcced075809',
+      materialUrl: 'https://www.canva.com/design/DAFs205OVsA/q4I5cxQDRlU5zFgURJb21A/view?utm_content=DAFs205OVsA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcced075809',
       materialName: 'Apresentação Canva',
       content: 'Clique no botão abaixo para abrir o material completo sobre o Présent de l\'Indicatif. A apresentação abre em uma nova aba.',
       duration: 30,
