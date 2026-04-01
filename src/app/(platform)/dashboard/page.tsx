@@ -23,7 +23,11 @@ export default async function DashboardPage() {
 
   const user = session.user
 
-  const [activeWeek, userClubMemberships, allClubs, recentPosts] = await Promise.all([
+  const [currentUser, activeWeek, userClubMemberships, allClubs, recentPosts] = await Promise.all([
+    prisma.user.findUnique({
+      where: { id: user.id },
+      select: { tourDone: true },
+    }),
     prisma.weekContent.findFirst({
       where: { isActive: true },
       orderBy: { weekNumber: 'desc' },
@@ -57,12 +61,11 @@ export default async function DashboardPage() {
     return a.sortOrder - b.sortOrder
   })
 
-  // Tour desativado temporariamente
-  // const showTour = !currentUser?.tourDone
+  const showTour = !currentUser?.tourDone
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* {showTour && <WelcomeTour userName={user.name?.split(' ')[0] || ''} />} */}
+      {showTour && <WelcomeTour userName={user.name?.split(' ')[0] || ''} />}
 
       {/* Greeting */}
       <div className="mb-6">
