@@ -76,7 +76,7 @@ export function ClubsCarousel({ clubs }: { clubs: Club[] }) {
       {/* Cards */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide"
+        className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         style={{ scrollSnapType: 'x mandatory', scrollPadding: '0 16px' }}
       >
         {clubs.map((club) => (
