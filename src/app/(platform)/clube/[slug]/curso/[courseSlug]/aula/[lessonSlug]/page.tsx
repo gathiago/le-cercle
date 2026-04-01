@@ -14,14 +14,6 @@ export default async function LessonPage({
   const session = await auth()
   if (!session?.user) redirect('/login')
 
-  const currentUser = await prisma.user.findUnique({
-    where: { id: session.user.id },
-    select: { subscriptionStatus: true },
-  })
-  if (!currentUser || currentUser.subscriptionStatus !== 'ACTIVE') {
-    redirect('/checkout')
-  }
-
   const { slug, courseSlug, lessonSlug } = await params
 
   // Verify club membership
