@@ -17,15 +17,6 @@ export default async function ClubDetailPage({ params }: { params: Promise<{ slu
   const session = await auth()
   if (!session?.user) redirect('/login')
 
-  // Check subscription is active
-  const currentUser = await prisma.user.findUnique({
-    where: { id: session.user.id },
-    select: { subscriptionStatus: true },
-  })
-  if (!currentUser || currentUser.subscriptionStatus !== 'ACTIVE') {
-    redirect('/checkout')
-  }
-
   const { slug } = await params
 
   const club = await prisma.club.findUnique({

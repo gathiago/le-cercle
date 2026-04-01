@@ -55,14 +55,6 @@ export default auth((req) => {
     return NextResponse.next()
   }
 
-  // Onboarding check (members only)
-  if (!user.onboardingDone) {
-    if (!pathname.startsWith('/onboarding') && !pathname.startsWith('/api')) {
-      return NextResponse.redirect(new URL('/onboarding', nextUrl))
-    }
-    return NextResponse.next()
-  }
-
   return NextResponse.next()
 })
 
