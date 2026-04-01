@@ -53,7 +53,7 @@ export default async function EncontrosPage() {
             return (
               <div
                 key={meeting.id}
-                className={`bg-white rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] ${
+                className={`bg-[var(--color-surface-lowest)] rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] ${
                   isToday ? 'ring-2 ring-[var(--color-laranja)]/30' : ''
                 }`}
               >

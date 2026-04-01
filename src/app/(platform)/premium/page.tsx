@@ -15,7 +15,7 @@ export default async function PremiumPage() {
   if (!isPremium) {
     return (
       <div className="max-w-lg mx-auto text-center py-16">
-        <div className="bg-white rounded-3xl p-10 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
+        <div className="bg-[var(--color-surface-lowest)] rounded-3xl p-10 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center mx-auto mb-6">
             <Crown className="h-8 w-8 text-white" />
           </div>
@@ -60,7 +60,7 @@ export default async function PremiumPage() {
       ) : (
         <div className="space-y-4">
           {events.map((event) => (
-            <div key={event.id} className="bg-white rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
+            <div key={event.id} className="bg-[var(--color-surface-lowest)] rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
               <div className="flex flex-col md:flex-row gap-4">
                 {event.imageUrl && (
                   <div className="w-full md:w-48 h-32 rounded-xl overflow-hidden shrink-0">

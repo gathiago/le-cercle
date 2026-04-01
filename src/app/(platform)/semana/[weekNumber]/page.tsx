@@ -41,7 +41,7 @@ export default async function SemanaDetailPage({ params }: { params: Promise<{ w
       {/* Music */}
       {week.musicUrl && (
         <div className="bg-gradient-to-r from-[#934655] to-[var(--color-rosa)] rounded-2xl p-5 mb-6 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-[var(--color-surface-lowest)]/20 flex items-center justify-center shrink-0">
             <Music className="h-6 w-6 text-white" />
           </div>
           <div className="min-w-0 flex-1">
@@ -97,7 +97,7 @@ export default async function SemanaDetailPage({ params }: { params: Promise<{ w
 
       {/* Exercise */}
       {week.exercise && (
-        <div className="bg-white rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] mb-6">
+        <div className="bg-[var(--color-surface-lowest)] rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] mb-6">
           <h2 className="text-xl font-bold text-[var(--color-azul-escuro)] mb-3">Exercício</h2>
           <p className="text-[var(--color-azul-escuro)] leading-relaxed">{week.exercise}</p>
         </div>

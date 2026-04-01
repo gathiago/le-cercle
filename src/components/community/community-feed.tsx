@@ -74,7 +74,7 @@ export function CommunityFeed({
       {/* Posts */}
       <div className="space-y-4">
         {filteredPosts.map(post => (
-          <div key={post.id} className="bg-white rounded-2xl p-5 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
+          <div key={post.id} className="bg-[var(--color-surface-lowest)] rounded-2xl p-5 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
             {/* Author */}
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">

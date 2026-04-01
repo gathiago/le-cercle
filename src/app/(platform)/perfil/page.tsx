@@ -44,7 +44,7 @@ export default async function PerfilPage() {
       <h1 className="text-2xl font-bold text-[var(--color-azul-escuro)] mb-8">Meu Perfil</h1>
 
       {/* Profile Card */}
-      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] mb-6">
+      <div className="bg-[var(--color-surface-lowest)] rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] mb-6">
         <div className="flex items-center gap-4 mb-6">
           <div className="w-16 h-16 rounded-full bg-[var(--color-rosa)] flex items-center justify-center text-white text-2xl font-bold">
             {user.name.charAt(0).toUpperCase()}
@@ -69,7 +69,7 @@ export default async function PerfilPage() {
       </div>
 
       {/* Subscription */}
-      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
+      <div className="bg-[var(--color-surface-lowest)] rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)]">
         <h3 className="font-semibold text-[var(--color-azul-escuro)] mb-4 flex items-center gap-2">
           <CreditCard className="h-5 w-5" /> Assinatura
         </h3>

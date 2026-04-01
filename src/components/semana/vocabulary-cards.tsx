@@ -29,7 +29,7 @@ export function VocabularyCards({ vocabulary }: { vocabulary: VocabItem[] }) {
           >
             {/* Front */}
             <div
-              className="absolute inset-0 bg-white rounded-2xl shadow-[0_2px_12px_rgba(48,51,66,0.04)] flex items-center justify-center px-4"
+              className="absolute inset-0 bg-[var(--color-surface-lowest)] rounded-2xl shadow-[0_2px_12px_rgba(48,51,66,0.04)] flex items-center justify-center px-4"
               style={{ backfaceVisibility: 'hidden' }}
             >
               <span className="text-[var(--color-azul-escuro)] font-medium">{item.word}</span>

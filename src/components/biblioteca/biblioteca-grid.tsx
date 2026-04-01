@@ -42,11 +42,11 @@ export function BibliotecaGrid({ weeks }: { weeks: Week[] }) {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Buscar por título ou descrição..."
-            className="pl-9 bg-white border-none rounded-xl shadow-[0_2px_12px_rgba(48,51,66,0.04)]"
+            className="pl-9 bg-[var(--color-surface-lowest)] border-none rounded-xl shadow-[0_2px_12px_rgba(48,51,66,0.04)]"
           />
         </div>
         <Select value={filterLevel} onValueChange={v => setFilterLevel(v ?? 'all')}>
-          <SelectTrigger className="w-[160px] bg-white border-none rounded-xl shadow-[0_2px_12px_rgba(48,51,66,0.04)]">
+          <SelectTrigger className="w-[160px] bg-[var(--color-surface-lowest)] border-none rounded-xl shadow-[0_2px_12px_rgba(48,51,66,0.04)]">
             <SelectValue placeholder="Nível" />
           </SelectTrigger>
           <SelectContent>
@@ -70,7 +70,7 @@ export function BibliotecaGrid({ weeks }: { weeks: Week[] }) {
             <Link
               key={week.id}
               href={`/semana/${week.weekNumber}`}
-              className="bg-white rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] hover:shadow-[0_8px_32px_rgba(48,51,66,0.1)] transition-shadow"
+              className="bg-[var(--color-surface-lowest)] rounded-2xl p-6 shadow-[0_4px_24px_rgba(48,51,66,0.06)] hover:shadow-[0_8px_32px_rgba(48,51,66,0.1)] transition-shadow"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">

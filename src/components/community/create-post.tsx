@@ -97,7 +97,7 @@ export function CreatePost({ userLevel }: { userLevel: string }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 shadow-[0_4px_24px_rgba(48,51,66,0.06)] mb-6">
+    <div className="bg-[var(--color-surface-lowest)] rounded-2xl p-5 shadow-[0_4px_24px_rgba(48,51,66,0.06)] mb-6">
       <div className="flex gap-2 mb-3">
         {[
           { value: 'PRATICA', label: 'Prática' },
